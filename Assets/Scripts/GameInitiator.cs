@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,6 +6,7 @@ using UnityEngine.EventSystems;
 /// Contains the only start method in our game
 ///
 /// This class handles bindings, initialization and
+/// the creation of objects within our scene.
 /// </summary>
 
 public class GameInitiator : MonoBehaviour
@@ -19,66 +19,46 @@ public class GameInitiator : MonoBehaviour
     [SerializeField] private LevelManager _levelManager;
     [SerializeField] private Player _player;
 
-    // Bindings
-
-    // private async Awaitable Start()
-    // {
-    //     Debug.Log("Loading...");
-    //     //BindObjects()
-    //     // await InitializeObjects()
-    //
-    //     await Awaitable.WaitForSecondsAsync(2);
-    //     
-    //     Debug.Log("Finished loading.");
-    // }
-
     private async void Start()
     {
         BindObjects();
         Debug.Log("Loading...");
-        // _loadingScreen.Show();
-        await InitializeObjects(); // init any service that needs to be set up at start of game
-        // e.g. analyticsService or Unity's new input system.
-        await CreateObjects();
+        // Show loading screen
         
+        await InitializeObjects();
+        await CreateObjects();
         PrepareGame();
-        // _loadingScreen.Hide();
+        
+        // Hide loading screen
         Debug.Log("Finished loading.");
         await BeginGame();
     }
 
-    // Creates an instance of each class in the scene
+    // Connecting our instances
     private void BindObjects()
     {
-        Instantiate(_mainCamera);
-        Instantiate(_mainDirectionalLight);
-        // loadingScreen
-        Instantiate(_mainEventSystem);
-        Instantiate(_background);
-        // Instantiate(_levelManager);
-        Instantiate(_player);
+        _mainCamera = Instantiate(_mainCamera);
+        _mainDirectionalLight = Instantiate(_mainDirectionalLight);
+        _mainEventSystem = Instantiate(_mainEventSystem);
+        
+        //TODO: loadingScreen, Spawner, lvlManager
+        //TODO: (OPTIONAL) Dependency Injection.
     }
 
+    // Turning on our services
     private async Awaitable InitializeObjects()
-    {
-        
-    }
+    { }
     
     // Loading our heavy objects
     private async Awaitable CreateObjects()
     {
-        // Could be through Resources
-        // AssetBundle
-        // Adressables
         _background = Instantiate(_background);
         _player = Instantiate(_player);
-    }
-
-    private async Awaitable DoSomething()
-    {
         
+        //TODO: LevelUI, Obstacles
     }
     
+    // Setting up our objects
     private void PrepareGame()
     {
         // _player.MoveToPosition();
@@ -89,11 +69,10 @@ public class GameInitiator : MonoBehaviour
         // level and ui logic
     }
     
+    // Here you decide the game's flow
     private async Awaitable BeginGame()
     {
         // Show UI animation e.g. stage 1, stage 2 etc.
-        // await _levelUI.ShowLevelAnimation();
-        
-        // enable enemies
+        // rest of game flow
     }
 }
