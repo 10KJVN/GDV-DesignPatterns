@@ -168,6 +168,7 @@ MonoBehaviour:
   _mainEventSystem: {fileID: 5323557604684344467, guid: 615e64be95b19534e97283ae5c5a6b8c, type: 3}
   _background: {fileID: 102264863680901040, guid: 49cc988363b85b44bb2c3f83cfa03d56, type: 3}
   _levelManager: {fileID: 497284583194251454, guid: 6e537667ed9d42448a76f10ee6a4218c, type: 3}
+  _loadingScreen: {fileID: 910953760449861724, guid: f6792cb9991668943b2e077268f55e23, type: 3}
   _player: {fileID: 6893969658464857213, guid: 0f0096a39444f7f47911c6519b15385a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

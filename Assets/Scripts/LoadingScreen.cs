@@ -1,22 +1,33 @@
-public class LoadingScreen
+using UnityEngine;
+using UnityEngine.UI;
+
+public class LoadingScreen : MonoBehaviour, ILoadingScreen
 {
-    public LoadingScreen()
+    [SerializeField] private Slider _loadingSlider;
+    [SerializeField] private Canvas _loadingScreenCanvas;
+    
+    public void Show()
     {
-        // ctor
+        _loadingScreenCanvas.enabled = true;
     }
 
-    internal void Show()
+    public void Hide()
     {
-        
+        _loadingScreenCanvas.enabled = false;
     }
 
-    internal void Hide()
+    public void ResetSlider()
     {
-        
+        _loadingSlider.value = 0;
+    }
+
+    public Awaitable SetLoadingSlider(float value)
+    {
+        throw new System.NotImplementedException();
     }
 
     public void SetBarPercent(float percent)
     {
-        
+        _loadingSlider.value = percent;
     }
 }

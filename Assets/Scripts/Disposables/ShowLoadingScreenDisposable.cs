@@ -1,24 +1,25 @@
 using System;
 
-public class ShowLoadingScreenDisposable : IDisposable
+namespace Disposables
 {
-    private readonly LoadingScreen _loadingScreen;
-
-    public ShowLoadingScreenDisposable(LoadingScreen loadingScreen)
+    public class ShowLoadingScreenDisposable : IDisposable
     {
-        _loadingScreen = loadingScreen;
-        _loadingScreen.Show();
-    }
+        private readonly LoadingScreen _loadingScreen;
 
-    public void SetLoadingBarPercent(float percent)
-    {
-        _loadingScreen.SetBarPercent(percent);
-    }
+        public ShowLoadingScreenDisposable(LoadingScreen loadingScreen)
+        {
+            _loadingScreen = loadingScreen;
+            _loadingScreen.Show();
+        }
 
-    public void Dispose()
-    {
-        _loadingScreen.Hide();
+        public void SetLoadingBarPercent(float percent)
+        {
+            _loadingScreen.SetBarPercent(percent);
+        }
+
+        public void Dispose()
+        {
+            _loadingScreen.Hide();
+        }
     }
-    
-    //TODO: Make 'Disposable' prefix, keep within namespace.
 }
