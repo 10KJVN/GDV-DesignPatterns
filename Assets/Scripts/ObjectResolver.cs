@@ -43,7 +43,7 @@ public class ObjectResolver
         if (!_registrations.Contains(instanceType))
         {
             Debug.LogError($"Couldn't resolve type {instanceType}");
-            return default;
+            return null;
         }
 
         var constructor = instanceType.GetConstructors().First();
@@ -54,14 +54,3 @@ public class ObjectResolver
         return instance;
     }
 }
-
-// Class Container
-// class References
-// void Awake()
-// var objectResolver = new();
-
-// objectResolver.RegisterInstance(NameOfReferencedClass);
-
-// (referencedClassName).InjectResolver(objectResolver)
-
-// Dependency Injection is even better

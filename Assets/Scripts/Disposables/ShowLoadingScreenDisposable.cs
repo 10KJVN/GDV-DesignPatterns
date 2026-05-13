@@ -19,4 +19,6 @@ public class ShowLoadingScreenDisposable : IDisposable
     {
         _loadingScreen.Hide();
     }
+    
+    //TODO: Make 'Disposable' prefix, keep within namespace.
 }

@@ -1,12 +1,13 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// The entry point to our game.
+/// The single entry point to our game.
 /// Contains the only start method in our game
 ///
 /// This class handles bindings, initialization and
-/// the creation of objects within our scene.
+/// the creation of objects within our scene(s).
 /// </summary>
 
 public class GameInitiator : MonoBehaviour
@@ -21,17 +22,24 @@ public class GameInitiator : MonoBehaviour
 
     private async void Start()
     {
-        BindObjects();
-        Debug.Log("Loading...");
-        // Show loading screen
+        try 
+        {
+            BindObjects();
+            Debug.Log("Loading...");
+            // Show loading screen
+
+            await InitializeObjects();
+            await CreateObjects();
+            PrepareGame();
+
+            // Hide loading screen
+            Debug.Log("Finished loading.");
+            await BeginGame();
+        }
         
-        await InitializeObjects();
-        await CreateObjects();
-        PrepareGame();
+        catch { Debug.Log("Failed loading."); }
         
-        // Hide loading screen
-        Debug.Log("Finished loading.");
-        await BeginGame();
+        finally { Debug.Log("Game Launched successfully."); }
     }
 
     // Connecting our instances
@@ -45,11 +53,11 @@ public class GameInitiator : MonoBehaviour
         //TODO: (OPTIONAL) Dependency Injection.
     }
 
-    // Turning on our services
+    // Turning on our services e.g. persistent systems.
     private async Awaitable InitializeObjects()
     { }
     
-    // Loading our heavy objects
+    // Loading in our Entities / Gameplay Objects
     private async Awaitable CreateObjects()
     {
         _background = Instantiate(_background);
