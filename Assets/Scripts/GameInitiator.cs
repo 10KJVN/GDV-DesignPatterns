@@ -21,6 +21,7 @@ public class GameInitiator : MonoBehaviour
     [SerializeField] private LevelManager _levelManager;
     [SerializeField] private LoadingScreen _loadingScreen;
     [SerializeField] private Player _player;
+    [SerializeField] private Spell _spell;
 
     private async void Start()
     {
@@ -71,7 +72,8 @@ public class GameInitiator : MonoBehaviour
     {
         _background = Instantiate(_background);
         _player = Instantiate(_player);
-        
+        _spell = Instantiate(_spell);
+
         //TODO: LevelUI, Obstacles
     }
     
@@ -81,7 +83,12 @@ public class GameInitiator : MonoBehaviour
         // _player.MoveToPosition();
         // _player.SetStartingElement();
         
-        // enemy or obstacle logic
+        _spell = new Spell.Builder()
+            .WithName("MiBombo")
+            .WithHealth(100)
+            .WithSpeed(5)
+            .WithDamage(10)
+            .Build();
         
         // level and ui logic
     }
