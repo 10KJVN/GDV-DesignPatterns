@@ -26,15 +26,7 @@ public class Thunderbolt : ISpell
     }
 }
 
-public abstract class SpellFactory
+public abstract class SpellFactory : ScriptableObject
 {
     public abstract ISpell CreateSpell();
-}
-
-public class FireFactory : SpellFactory
-{
-    public override ISpell CreateSpell()
-    {
-        return new Fireball();
-    }
 }

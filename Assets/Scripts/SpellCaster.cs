@@ -3,17 +3,20 @@ using UnityEngine;
 
 public class SpellCaster : MonoBehaviour
 {
-    private SpellFactory _spellFactory;
+    [SerializeField] private SpellFactory _spellFactory;
     private ISpell _spell = ISpell.CreateDefault();
-    
-    SpellCaster()
-    {
-        _spellFactory = new FireFactory();
-        _spell = _spellFactory?.CreateSpell();
-    }
+
+    // private SpellCaster()
+    // {
+    //     _spellFactory = new FireFactory();
+    //     _spell = _spellFactory?.CreateSpell();
+    // }
 
     private void Start()
     {
+        _spellFactory = new FireFactory();
+        _spell = _spellFactory?.CreateSpell();
+        
         Cast();
     }
 
