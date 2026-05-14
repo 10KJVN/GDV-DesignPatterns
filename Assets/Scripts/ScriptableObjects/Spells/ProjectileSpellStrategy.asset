@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46adc4e5fe3e468a936dd43d5df70fcc, type: 3}
+  m_Name: ProjectileSpellStrategy
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileSpellStrategy
+  projectilePrefab: {fileID: 8011310055686966477, guid: b5e804800c854ae4a8c40cfb58249ce9, type: 3}
+  speed: 10
+  duration: 10

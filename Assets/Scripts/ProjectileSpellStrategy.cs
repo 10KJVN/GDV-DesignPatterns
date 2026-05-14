@@ -12,7 +12,7 @@ public class ProjectileSpellStrategy : SpellStrategy
         new ProjectileBuilder()
             .WithProjectilePrefab(projectilePrefab)
             .WithSpeed(speed)
-            .WithDuration(duration);
-        //.Build(origin);
+            .WithDuration(duration)
+            .Build(origin);
     }
 }
