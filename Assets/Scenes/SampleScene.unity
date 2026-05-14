@@ -226,7 +226,7 @@ Transform:
   m_GameObject: {fileID: 281047226}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.2, z: 0}
+  m_LocalPosition: {x: 0, y: -1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -526,6 +526,7 @@ GameObject:
   - component: {fileID: 524604254}
   - component: {fileID: 524604253}
   - component: {fileID: 524604252}
+  - component: {fileID: 524604257}
   - component: {fileID: 524604256}
   m_Layer: 0
   m_Name: Player_Capsule
@@ -623,7 +624,7 @@ Transform:
   m_GameObject: {fileID: 524604251}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.25, y: -0.2, z: 0}
+  m_LocalPosition: {x: 3.74, y: -0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -642,6 +643,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpellCaster
   _spellFactory: {fileID: 11400000, guid: 9788dd4cf53db3a46a3af0e34755e278, type: 2}
+--- !u!114 &524604257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524604251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8511fc5682c454eb1f575fd0128663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
+  spells:
+  - {fileID: 11400000, guid: 2917f9793d7701c449d71aba70715210, type: 2}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

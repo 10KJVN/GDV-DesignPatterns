@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private SpellStrategy[] spells;
+
     void Start()
     {
-        
+        CastSpell(0);
     }
 
-    // Update is called once per frame
-    void Update()
+    void CastSpell(int index)
     {
-        
+        spells[index].CastSpell(transform);
     }
 }
