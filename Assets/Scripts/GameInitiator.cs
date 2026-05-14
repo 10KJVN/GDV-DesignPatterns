@@ -2,6 +2,7 @@ using System;
 using Disposables;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// The single entry point to our game.
@@ -91,6 +92,7 @@ public class GameInitiator : MonoBehaviour
             .Build();
         
         // level and ui logic
+        SceneManager.LoadScene("Level", LoadSceneMode.Additive);
     }
     
     // Here you decide the game's flow

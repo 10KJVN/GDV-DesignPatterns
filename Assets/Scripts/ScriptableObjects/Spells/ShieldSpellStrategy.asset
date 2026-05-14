@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ShieldSpellStrategy
   m_EditorClassIdentifier: Assembly-CSharp::ShieldSpellStrategy
   shieldPrefab: {fileID: 5228451660820496058, guid: 6af47bdd2de129a40a794d8fd94f5a32, type: 3}
-  duration: 10
+  duration: 4
