@@ -18,6 +18,14 @@ public class Fireball : ISpell
     }
 }
 
+public class Iceball : ISpell
+{
+    public void Cast()
+    {
+        Debug.Log("ICEBALL!");
+    }
+}
+
 public class Thunderbolt : ISpell
 {
     public void Cast()

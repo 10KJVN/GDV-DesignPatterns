@@ -12,10 +12,11 @@ public class SpellCaster : MonoBehaviour
     //     _spell = _spellFactory?.CreateSpell();
     // }
 
+    // TODO: Rethink auto-assigning an element on start.
     private void Start()
     {
-        _spellFactory = new FireFactory();
-        _spell = _spellFactory?.CreateSpell();
+        //_spellFactory = new FireFactory(); // Default fallback
+        _spell = _spellFactory?.CreateSpell(); // Assigns selected Factory spell
         
         Cast();
     }
