@@ -22,7 +22,9 @@ public class GameInitiator : MonoBehaviour
     [SerializeField] private LevelManager _levelManager;
     [SerializeField] private LoadingScreen _loadingScreen;
     [SerializeField] private Player _player;
-    [SerializeField] private Spell _spell;
+    private Spell _spell;
+
+    [SerializeField] private Transform[] randomStartPositions;
 
     private async void Start()
     {
@@ -73,7 +75,6 @@ public class GameInitiator : MonoBehaviour
     {
         _background = Instantiate(_background);
         _player = Instantiate(_player);
-        _spell = Instantiate(_spell);
 
         //TODO: LevelUI, Obstacles
     }
@@ -100,5 +101,7 @@ public class GameInitiator : MonoBehaviour
     {
         // Show UI animation e.g. stage 1, stage 2 etc.
         // rest of game flow
+
+        _spell.Cast();
     }
 }
