@@ -15,7 +15,6 @@ public class SpellCaster : MonoBehaviour
     // TODO: Rethink auto-assigning an element on start.
     private void Start()
     {
-        //_spellFactory = new FireFactory(); // Default fallback
         _spell = _spellFactory?.CreateSpell(); // Assigns selected Factory spell
         
         Cast();

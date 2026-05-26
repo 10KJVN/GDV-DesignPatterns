@@ -14,7 +14,7 @@ public class Spell : ISpell
 
     public void Cast()
     {
-        Debug.Log("Default Spell");
+        Debug.Log($"{this} : Default Spell");
     }
 
     public class Builder
