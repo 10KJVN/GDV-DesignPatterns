@@ -85,13 +85,6 @@ public class GameInitiator : MonoBehaviour
         // _player.MoveToPosition();
         // _player.SetStartingElement();
         
-        _spell = new Spell.Builder()
-            .WithName("MiBombo")
-            .WithHealth(100)
-            .WithSpeed(5)
-            .WithDamage(10)
-            .Build();
-        
         // level and ui logic
         SceneManager.LoadScene("Level", LoadSceneMode.Additive);
     }
