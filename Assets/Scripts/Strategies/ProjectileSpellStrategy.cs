@@ -9,7 +9,7 @@ public class ProjectileSpellStrategy : SpellStrategy
 
     public override void CastSpell(Transform origin)
     {
-        new ProjectileBuilder()
+        CreateInstance<ProjectileBuilder>()
             .WithProjectilePrefab(projectilePrefab)
             .WithSpeed(speed)
             .WithDuration(duration)
