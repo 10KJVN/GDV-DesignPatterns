@@ -3,12 +3,16 @@ using UnityEngine;
 public class Spell
 {
     // BASIC PROPERTIES
-    public string Name { get; set; }
-    public int ManaCost { get; set; }
-    public int Damage { get; set; }
+    public string Name { get; set; } // Identity
+    public int ManaCost { get; set; } // Cost
+    public int Damage { get; set; } // Effect
 
-    public enum ElementType { Fire, Ice, Thunder }
+    // ADDITIONAL PROPERTIES
     public float Speed { get; set; }
+    
+    // OPTIONAL PROPERTIES
+    public enum ElementType { Fire, Ice, Thunder }
+    // TargetType, EffectType, etc.
 
     public Spell() // Default CTOR
     {
@@ -17,6 +21,7 @@ public class Spell
 
     public void Cast()
     {
+        Debug.Log($"Required Mana: {ManaCost}");
         Debug.Log($"Casting {Name}! It deals {Damage}");
     }
 
