@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface ITargetingComponent
+public interface ITargetingStrategy
 {
     Transform[] GetTargets(Transform caster);
 }
