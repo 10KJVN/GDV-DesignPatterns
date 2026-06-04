@@ -22,6 +22,8 @@ public class GameInitiator : MonoBehaviour
     [SerializeField] private LevelManager _levelManager;
     [SerializeField] private LoadingScreen _loadingScreen;
     [SerializeField] private Player _player;
+
+    private SpellBuilder _spellBuilder = new();
     private Spell _spell;
 
     [SerializeField] private Transform[] randomStartPositions;
@@ -68,7 +70,17 @@ public class GameInitiator : MonoBehaviour
 
     // Turning on our services e.g. persistent systems.
     private async Awaitable InitializeObjects()
-    { }
+    {
+        var build = ScriptableObject.CreateInstance<Spell>();
+        _spellBuilder
+            .WithName(build.Name = "yessirski")
+            .WithCost(build.Cost = 10)
+            .WithDamage(build.Damage = 30)
+            //.WithSpeed(build.Speed = 3.5f)
+            .Build();
+        
+        _spell = build;
+    }
     
     // Loading in our Entities / Gameplay Objects
     private async Awaitable CreateObjects()
@@ -95,6 +107,6 @@ public class GameInitiator : MonoBehaviour
         // Show UI animation e.g. stage 1, stage 2 etc.
         // rest of game flow
 
-        _spell.Cast();
+        _spell.Cast(_mainCamera.transform);
     }
 }

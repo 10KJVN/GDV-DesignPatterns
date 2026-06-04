@@ -35,14 +35,16 @@ public class SpellBuilder
 
     public Spell Build()
     {
-        var spell = new Spell();
+        //var spell = new Spell();
+        var spell = ScriptableObject.CreateInstance<Spell>();
+        //var spell = new GameObject().GetComponent<Spell>();
         //var spell = new GameObject("Spell").AddComponent<Spell>();
-
+    
         spell.Name = _name;
-        spell.ManaCost = _cost;
+        spell.Cost = _cost;
         spell.Damage = _damage;
         spell.Speed = _speed;
-
+    
         return spell;
     }
 }
