@@ -3,7 +3,19 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    //public Action 
+
     [SerializeField] private SpellStrategy[] spells;
+
+    private void OnEnable()
+    {
+        HeadsUpDisplay.OnButtonPressed += CastSpell;
+    }
+
+    private void OnDisable()
+    {
+        HeadsUpDisplay.OnButtonPressed -= CastSpell;
+    }
 
     void Start()
     {
@@ -13,20 +25,20 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            CastSpell(0);
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    CastSpell(0);
+        //}
         
-        else if (Input.GetMouseButtonDown(1))
-        {
-            CastSpell(1);
-        }
+        //else if (Input.GetMouseButtonDown(1))
+        //{
+        //    CastSpell(1);
+        //}
         
-        else if (Input.GetMouseButtonDown(2))
-        {
-            CastSpell(2);
-        }
+        //else if (Input.GetMouseButtonDown(2))
+        //{
+        //    CastSpell(2);
+        //}
     }
 
     void CastSpell(int index)
