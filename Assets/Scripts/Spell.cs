@@ -38,5 +38,15 @@ public sealed class Spell : ScriptableObject
         Debug.Log($"Required Mana: {Cost}");
         Debug.Log($"Casting {Name}! It deals {Damage}");
     }
+    
+    private SpellData _data;
+
+    public void Execute(IDamagable target)
+    {
+        foreach (var effect in _data.Effects)
+        {
+            //effect.Apply(target);
+        }
+    }
 
 }
