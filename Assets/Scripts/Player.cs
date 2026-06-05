@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //public Action 
-
+    public Ability[] hotbar;
     [SerializeField] private SpellStrategy[] spells;
 
     private void OnEnable()
@@ -25,20 +24,14 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    CastSpell(0);
-        //}
-        
-        //else if (Input.GetMouseButtonDown(1))
-        //{
-        //    CastSpell(1);
-        //}
-        
-        //else if (Input.GetMouseButtonDown(2))
-        //{
-        //    CastSpell(2);
-        //}
+        for (int i = 0; i < hotbar.Length; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+            {
+                // TODO: Replace with real targeting system
+                hotbar[i].Execute(FindFirstObjectByType<Enemy>()); 
+            }
+        }
     }
 
     void CastSpell(int index)

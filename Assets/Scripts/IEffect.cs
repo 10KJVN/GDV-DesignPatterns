@@ -3,6 +3,20 @@ using System.Collections.Generic;
 using ImprovedTimers;
 using UnityEngine;
 
+[Serializable]
+public class Ability
+{
+    [SerializeReference] public List<IEffect<IDamagable>> effects = new();
+
+    public void Execute(IDamagable target)
+    {
+        foreach (var effect in effects)
+        {
+            effect.Apply(target);
+        }
+    }
+}
+
 public interface IDamagable
 {
     void TakeDamage(int damage);
