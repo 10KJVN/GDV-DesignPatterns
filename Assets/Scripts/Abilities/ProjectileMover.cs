@@ -5,18 +5,17 @@ namespace Abilities
 {
     public class ProjectileMover : MonoBehaviour
     {
-        private Action<Collision> onHitCallback;
+        private Action<Collision> _onHitCallback;
 
         public void SetCallback(Action<Collision> callback)
         {
-            onHitCallback = callback;
+            _onHitCallback = callback;
         }
 
         private void OnCollisionEnter(Collision collision)
         {
             Debug.Log($"[VFX] Projectile hit: {collision.gameObject.name}");
-            onHitCallback?.Invoke(collision);
-            Destroy(gameObject); // MB specific method
+            _onHitCallback?.Invoke(collision);
         }
     }
 }

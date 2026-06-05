@@ -14,11 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Abilities.AbilityData
   label: Fireball
   effects:
-  - rid: -2
+  - rid: 1150315793769299969
+  - rid: 1150315793769300037
   castTime: 2
   vfxPrefab: {fileID: 8013560777750307755, guid: d3f7034db37eaf44993ee105aefdb7e2, type: 3}
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 1150315793769299969
+      type: {class: KnockbackEffect, ns: Abilities, asm: Assembly-CSharp}
+      data:
+        force: 5
+    - rid: 1150315793769300037
+      type: {class: DamageEffect, ns: Abilities, asm: Assembly-CSharp}
+      data:
+        amount: 50

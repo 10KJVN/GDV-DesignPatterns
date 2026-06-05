@@ -24,7 +24,7 @@ namespace Abilities
             if (effects == null) effects = new List<AbilityEffect>();
         }
     }
-
+    
     /// <summary>
     /// Base class for all the effects.
     /// </summary>
@@ -33,11 +33,11 @@ namespace Abilities
     {
         public abstract void Execute(GameObject caster, GameObject target);
     }
-
+    
     [Serializable]
     internal class DamageEffect : AbilityEffect
     {
-        public int amount;
+        [SerializeField] public int amount;
         
         public override void Execute(GameObject caster, GameObject target)
         {

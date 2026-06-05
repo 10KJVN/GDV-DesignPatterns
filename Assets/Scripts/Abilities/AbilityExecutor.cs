@@ -10,14 +10,14 @@ namespace Abilities
     {
         [SerializeField] private AbilityData ability;
         [SerializeField] private GameObject target;
-        
-        CountdownTimer castTimer;
+
+        private CountdownTimer _castTimer;
 
         private void Awake()
         {
-            castTimer = new CountdownTimer(ability.castTime);
+            _castTimer = new CountdownTimer(ability.castTime);
             //castTimer.OnTimerStart = () => animationController.OrNull()?.PlayOneShot(ability.animationClip);
-            castTimer.OnTimerStop = SpawnVFX;
+            _castTimer.OnTimerStop = SpawnVFX;
         }
 
         private void SpawnVFX()
@@ -33,11 +33,12 @@ namespace Abilities
                     effect.Execute(gameObject, target);
                 }
             });
+            Destroy(vfx?.gameObject, 5f);
         }
 
         public void Execute(GameObject target)
         {
-            castTimer.Start();
+            _castTimer.Start();
         }
 
         private void Update()
