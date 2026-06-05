@@ -1,48 +1,5 @@
 using System;
-using System.Collections.Generic;
 using ImprovedTimers;
-using UnityEngine;
-
-[Serializable]
-public class Ability
-{
-    [SerializeReference] public List<IEffect<IDamagable>> effects = new();
-
-    public void Execute(IDamagable target)
-    {
-        foreach (var effect in effects)
-        {
-            effect.Apply(target);
-        }
-    }
-}
-
-public interface IDamagable
-{
-    void TakeDamage(int damage);
-}
-
-public interface IEffect<TTarget>
-{
-    void Apply(TTarget target);
-    void Cancel();
-}
-
-[Serializable]
-public class DamageEffect : IEffect<IDamagable>
-{
-    public int damageAmount = 10;
-
-    public void Apply(IDamagable target)
-    {
-        target.TakeDamage(damageAmount);
-    }
-
-    public void Cancel()
-    {
-        // no-op
-    }
-}
 
 [Serializable]
 public class DamageOverTimeEffect : IEffect<IDamagable>
