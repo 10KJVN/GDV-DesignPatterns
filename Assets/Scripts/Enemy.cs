@@ -39,6 +39,8 @@ public class Enemy : MonoBehaviour, IDamagable
 
     public void ApplyEffect(IEffect<IDamagable> effect)
     {
+        if (health <= 0) return;
+        
         effect.OnCompleted += RemoveEffect;
         _activeEffects.Add(effect);
         effect.Apply(this);
@@ -54,8 +56,9 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         Debug.Log("DIED");
 
-        foreach (var effect in _activeEffects)
+        for (int i = _activeEffects.Count - 1; i >= 0; i--)
         {
+            var effect = _activeEffects[i];
             effect.OnCompleted -= RemoveEffect;
             effect.Cancel();
         }
