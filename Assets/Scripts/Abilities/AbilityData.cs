@@ -49,12 +49,15 @@ namespace Abilities
         public void Apply(IDamagable target)
         {
             target.TakeDamage(damageAmount);
+            OnCompleted?.Invoke(this);
         }
 
         public void Cancel()
         {
-            //no-op
+            OnCompleted?.Invoke(this);
         }
+
+        public event Action<IEffect<IDamagable>> OnCompleted;
     }
 
     [Serializable]
@@ -84,12 +87,15 @@ namespace Abilities
             _timer?.Stop();
             Cleanup();
         }
-        
+
+        public event Action<IEffect<IDamagable>> OnCompleted;
+
         // TODO: Improve by keeping timer cached.
         private void Cleanup()
         {
             _timer = null; 
             _currentTarget = null;
+            OnCompleted?.Invoke(this);
         }
 
         public override void Execute(GameObject caster, GameObject target)

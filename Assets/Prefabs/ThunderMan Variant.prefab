@@ -60,7 +60,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThunderMan Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3485437028787029162, guid: eb21ed650a127514496e6203649a3f9c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -14,4 +14,6 @@ public class DamageEffect : IEffect<IDamagable>
     {
         // no-op
     }
+
+    public event Action<IEffect<IDamagable>> OnCompleted;
 }

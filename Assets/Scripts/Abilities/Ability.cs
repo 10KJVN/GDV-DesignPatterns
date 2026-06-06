@@ -7,13 +7,25 @@ namespace Abilities
     [Serializable]
     public class Ability
     {
+        public AudioClip castSfx;
+        public GameObject castVfx;
+        public GameObject runningVfx;
+        // caster information maybe
+        
         [SerializeReference] public List<IEffect<IDamagable>> effects = new();
 
         public void Execute(IDamagable target)
         {
             foreach (var effect in effects)
             {
-                effect.Apply(target);
+                if (target is Enemy enemy)
+                {
+                    enemy.ApplyEffect(effect);
+                }
+                else
+                {
+                    effect.Apply(target);
+                }
             }
         }
     }

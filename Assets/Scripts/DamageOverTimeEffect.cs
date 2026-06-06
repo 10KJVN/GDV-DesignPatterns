@@ -29,6 +29,8 @@ public class DamageOverTimeEffect : IEffect<IDamagable>
         Cleanup();
     }
 
+    public event Action<IEffect<IDamagable>> OnCompleted;
+
     // TODO: Improve by caching timers.
     private void Cleanup()
     {

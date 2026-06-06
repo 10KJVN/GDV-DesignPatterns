@@ -1,5 +1,6 @@
 using System;
 using Abilities;
+using Extensions;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -30,9 +31,35 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1 + i))
             {
                 // TODO: Replace with real targeting system
-                hotbar[i].Execute(FindFirstObjectByType<Enemy>()); 
+                // hotbar[i].Execute(FindFirstObjectByType<Enemy>()); 
+                Cast(hotbar[i], FindFirstObjectByType<Enemy>()); 
             }
         }
+    }
+
+    void Cast(Ability ability, IDamagable target)
+    {
+        ability.Execute(target);
+        
+        var targetMb = target as MonoBehaviour;
+
+        if (ability.castVfx && targetMb)
+        {
+            var vfx = Instantiate(ability.castVfx, targetMb.transform.position.With(y:2), Quaternion.identity);
+            Destroy(vfx, 3f);
+        }
+
+        if (ability.runningVfx && targetMb)
+        {
+            var runningVfxInstance = Instantiate(ability.runningVfx, targetMb.transform);
+            Destroy(runningVfxInstance, 3f);
+        }
+
+        if (ability.castSfx)
+        {
+            AudioSource.PlayClipAtPoint(ability.castSfx, transform.position);
+        }
+            
     }
 
     void CastSpell(int index)

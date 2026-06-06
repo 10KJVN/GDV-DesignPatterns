@@ -1,25 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamagable
 {
     public int health = 50;
 
-    // void Awake()
-    // {
-    //     Debug.Log("Awake");
-    // }
-    //
-    // void OnEnable()
-    // {
-    //     Debug.Log("ENABLED");
-    //     HeadsUpDisplay.OnButtonPressed += SpawnEnemy;
-    // }
-    //
-    // void OnDisable()
-    // {
-    //     Debug.Log("DISABLED");
-    //     HeadsUpDisplay.OnButtonPressed -= SpawnEnemy;
-    // }
+    private readonly List<IEffect<IDamagable>> _activeEffects = new();
 
     void Start()
     {
@@ -51,9 +37,30 @@ public class Enemy : MonoBehaviour, IDamagable
         }
     }
 
+    public void ApplyEffect(IEffect<IDamagable> effect)
+    {
+        effect.OnCompleted += RemoveEffect;
+        _activeEffects.Add(effect);
+        effect.Apply(this);
+    }
+
+    private void RemoveEffect(IEffect<IDamagable> effect)
+    {
+        effect.OnCompleted -= RemoveEffect;
+        _activeEffects.Remove(effect);
+    }
+
     public void Die()
     {
         Debug.Log("DIED");
+
+        foreach (var effect in _activeEffects)
+        {
+            effect.OnCompleted -= RemoveEffect;
+            effect.Cancel();
+        }
+        _activeEffects.Clear();
+        
         Destroy(gameObject);
     }
 }
