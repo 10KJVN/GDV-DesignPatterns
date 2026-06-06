@@ -6,6 +6,10 @@ using UnityEngine.InputSystem;
 
 namespace Abilities
 {
+    /// <summary>
+    /// Test script, executes a SINGLE ability
+    /// on a MANUALLY set target, both in the inspector.
+    /// </summary>
     public class AbilityExecutor : MonoBehaviour
     {
         [SerializeField] private AbilityData ability;
