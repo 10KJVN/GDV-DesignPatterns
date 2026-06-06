@@ -1,29 +1,29 @@
 using UnityEngine;
 
-public class Enemy : Component, IDamagable
+public class Enemy : MonoBehaviour, IDamagable
 {
     public int health = 50;
 
-    void Awake()
-    {
-        Debug.Log("Awake");
-    }
-
-    void OnEnable()
-    {
-        Debug.Log("ENABLED");
-        HeadsUpDisplay.OnButtonPressed += SpawnEnemy;
-    }
-
-    void OnDisable()
-    {
-        Debug.Log("DISABLED");
-        HeadsUpDisplay.OnButtonPressed -= SpawnEnemy;
-    }
+    // void Awake()
+    // {
+    //     Debug.Log("Awake");
+    // }
+    //
+    // void OnEnable()
+    // {
+    //     Debug.Log("ENABLED");
+    //     HeadsUpDisplay.OnButtonPressed += SpawnEnemy;
+    // }
+    //
+    // void OnDisable()
+    // {
+    //     Debug.Log("DISABLED");
+    //     HeadsUpDisplay.OnButtonPressed -= SpawnEnemy;
+    // }
 
     void Start()
     {
-        Debug.Log("STARTED");
+        Debug.Log("SPAWNED (PROBABLY)");
     }
 
     void OnDestroy()
