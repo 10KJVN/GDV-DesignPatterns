@@ -7,7 +7,7 @@ namespace Strategies
     public class ProjectileTargeting : TargetingStrategy
     {
         public GameObject projectilePrefab;
-        public float projectileSpeed 10f;
+        public float projectileSpeed = 10f;
         
         public override void Start(Ability ability, TargetingManager targetingManager)
         {
