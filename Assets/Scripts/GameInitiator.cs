@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Disposables;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -22,6 +23,10 @@ public class GameInitiator : MonoBehaviour
     [SerializeField] private LevelManager _levelManager;
     [SerializeField] private LoadingScreen _loadingScreen;
     [SerializeField] private Player _player;
+    //[SerializeField] private Enemy _enemy;
+
+    // A list to hold all the enemies
+    private List<Enemy> _enemies = new();
 
     private SpellBuilder _spellBuilder = new();
     private Spell _spell;
@@ -87,6 +92,17 @@ public class GameInitiator : MonoBehaviour
     {
         _background = Instantiate(_background);
         _player = Instantiate(_player);
+
+        for (int i = 0; i < 5; i++)
+        {
+            _enemies.Add(new Enemy());
+            var enemyGo = new GameObject("TestEnemy");
+            //var enemy = enemyGo.AddComponent<Enemy>();
+        }
+        
+        // GameObject enemyGO = new GameObject("TestEnemy");
+        // Enemy enemy = enemyGO.AddComponent<Enemy>();
+        //_enemy = enemy;
 
         //TODO: LevelUI, Obstacles
     }
