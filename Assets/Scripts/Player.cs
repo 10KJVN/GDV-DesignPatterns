@@ -1,11 +1,15 @@
 using System;
 using Abilities;
+using Strategies;
 using Extensions;
 using UnityEngine;
 
+[RequireComponent(typeof(TargetingManager))]
 public class Player : MonoBehaviour
 {
     public Ability[] hotbar;
+    public TargetingManager targetingManager;
+    
     [SerializeField] private SpellStrategy[] spells;
 
     private void OnEnable()
@@ -30,40 +34,20 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha1 + i))
             {
-                // TODO: Replace with real targeting system
-                // hotbar[i].Execute(FindFirstObjectByType<Enemy>()); 
-                Cast(hotbar[i], FindFirstObjectByType<Enemy>()); 
+                Cast(hotbar[i]);
             }
         }
     }
 
-    void Cast(Ability ability, IDamagable target)
+    void Cast(Ability ability)
     {
-        ability.Execute(target);
-        
-        var targetMb = target as MonoBehaviour;
-
-        if (ability.castVfx && targetMb)
-        {
-            var vfx = Instantiate(ability.castVfx, targetMb.transform.position.With(y:2), Quaternion.identity);
-            Destroy(vfx, 3f);
-        }
-
-        if (ability.runningVfx && targetMb)
-        {
-            var runningVfxInstance = Instantiate(ability.runningVfx, targetMb.transform);
-            Destroy(runningVfxInstance, 3f);
-        }
+        ability.Target(targetingManager);
 
         if (ability.castSfx)
         {
             AudioSource.PlayClipAtPoint(ability.castSfx, transform.position);
         }
-            
     }
 
-    void CastSpell(int index)
-    {
-        spells[index].CastSpell(transform);
-    }
+    void CastSpell(int index) => spells[index].CastSpell(transform);
 }

@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Extensions;
+using Strategies;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Abilities
 {
@@ -12,20 +15,47 @@ namespace Abilities
         public GameObject runningVfx;
         // caster information maybe
         
-        [SerializeReference] public List<IEffect<IDamagable>> effects = new();
+        [Header("Effects")]
+        [SerializeReference] public List<IEffectFactory<IDamagable>> effects = new();
+        public List<AbilityData> effectData = new(); // TODO: Refactor to WORKING ScriptableObject
+        
+        [Header("Targeting")]
+        [SerializeReference] private TargetingStrategy targetingStrategy;
+        // TODO: Refactor to ScriptableObject
+
+        public void Target(TargetingManager targetingManager)
+        {
+            if (targetingStrategy != null)
+            {
+                targetingStrategy.Start(this, targetingManager);
+            }
+        }
 
         public void Execute(IDamagable target)
         {
+            HandleVFX(target);
+            
             foreach (var effect in effects)
             {
-                if (target is Enemy enemy)
-                {
-                    enemy.ApplyEffect(effect);
-                }
-                else
-                {
-                    effect.Apply(target);
-                }
+                var runtimeEffect = effect.Create();
+                target.ApplyEffect(runtimeEffect);
+            }
+        }
+
+        private void HandleVFX(IDamagable target)
+        {
+            var targetMb = target as MonoBehaviour;
+            if (targetMb == null) return;
+
+            if (castVfx != null)
+            {
+                Object.Instantiate(castVfx, targetMb.transform.position.Add(y:2), Quaternion.identity);
+            }
+
+            if (runningVfx != null)
+            {
+                var runningVfxInstance = Object.Instantiate(runningVfx, targetMb.transform);
+                Object.Destroy(runningVfxInstance, 3f);
             }
         }
     }

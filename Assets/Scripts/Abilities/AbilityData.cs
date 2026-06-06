@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Abilities
 {
     [CreateAssetMenu(fileName = "AbilityData", menuName = "ScriptableObjects/AbilityData")]
-    internal class AbilityData : ScriptableObject
+    public class AbilityData : ScriptableObject
     {
         public string label;
         [SerializeReference] public List<AbilityEffect> effects;
@@ -30,21 +30,37 @@ namespace Abilities
     /// Base class for all the effects.
     /// </summary>
     [Serializable]
-    internal abstract class AbilityEffect
+    public abstract class AbilityEffect
     {
         public abstract void Execute(GameObject caster, GameObject target);
     }
+
+    public interface IEffectFactory<TTarget>
+    {
+        IEffect<TTarget> Create();
+    }
     
     [Serializable]
-    internal class DamageEffect : AbilityEffect, IEffect<IDamagable>
+    public class DamageEffectFactory : IEffectFactory<IDamagable>
+    {
+        public int damageAmount = 10;
+
+        public IEffect<IDamagable> Create()
+        {
+            return new DamageEffect { damageAmount = damageAmount };
+        }
+    }
+
+    [Serializable]
+    public struct DamageEffect : IEffect<IDamagable>
     {
         public int damageAmount;
         
-        public override void Execute(GameObject caster, GameObject target)
-        {
-            //target.GetComponent<Health>().ApplyDamage(amount);
-            Debug.Log($"{caster.name} dealt {damageAmount} damage to {target.name}");
-        }
+        // public override void Execute(GameObject caster, GameObject target)
+        // {
+        //     //target.GetComponent<Health>().ApplyDamage(amount);
+        //     Debug.Log($"{caster.name} dealt {damageAmount} damage to {target.name}");
+        // }
 
         public void Apply(IDamagable target)
         {
@@ -61,10 +77,28 @@ namespace Abilities
     }
 
     [Serializable]
-    internal class DamageOverTimeEffect : AbilityEffect, IEffect<IDamagable>
+    public class DamageOverTimeEffectFactory : IEffectFactory<IDamagable>
     {
-        public float duration = 5f;
+        public float duration = 5;
         public float tickInterval = 1f;
+        public int damagePerTick = 5;
+        
+        public IEffect<IDamagable> Create()
+        {
+            return new DamageOverTimeEffect
+            {
+                duration = duration,
+                tickInterval = tickInterval,
+                damagePerTick = damagePerTick
+            };
+        }
+    }
+
+    [Serializable]
+    public struct DamageOverTimeEffect : IEffect<IDamagable>
+    {
+        public float duration;
+        public float tickInterval;
         public int damagePerTick;
 
         private IntervalTimer _timer;
@@ -98,12 +132,12 @@ namespace Abilities
             OnCompleted?.Invoke(this);
         }
 
-        public override void Execute(GameObject caster, GameObject target)
-        {
-            Debug.Log($"{caster.name} inflicts {damagePerTick} DMG." +
-                      $" Every {tickInterval} to {target.name}!" +
-                      $" for {duration}s !!");
-        }
+        // public override void Execute(GameObject caster, GameObject target)
+        // {
+        //     Debug.Log($"{caster.name} inflicts {damagePerTick} DMG." +
+        //               $" Every {tickInterval} to {target.name}!" +
+        //               $" for {duration}s !!");
+        // }
     }
     
     [Serializable]
