@@ -93,11 +93,16 @@ public class GameInitiator : MonoBehaviour
         _background = Instantiate(_background);
         _player = Instantiate(_player);
 
+        // Create some enemies
         for (int i = 0; i < 5; i++)
         {
             _enemies.Add(new Enemy());
+        }
+
+        foreach (Enemy enemy in _enemies)
+        {
             var enemyGo = new GameObject("TestEnemy");
-            //var enemy = enemyGo.AddComponent<Enemy>();
+            //enem
         }
         
         // GameObject enemyGO = new GameObject("TestEnemy");
