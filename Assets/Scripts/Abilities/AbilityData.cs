@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ImprovedTimers;
 using UnityEngine;
 
 namespace Abilities
@@ -35,14 +36,67 @@ namespace Abilities
     }
     
     [Serializable]
-    internal class DamageEffect : AbilityEffect
+    internal class DamageEffect : AbilityEffect, IEffect<IDamagable>
     {
-        [SerializeField] public int amount;
+        public int damageAmount;
         
         public override void Execute(GameObject caster, GameObject target)
         {
             //target.GetComponent<Health>().ApplyDamage(amount);
-            Debug.Log($"{caster.name} dealt {amount} damage to {target.name}");
+            Debug.Log($"{caster.name} dealt {damageAmount} damage to {target.name}");
+        }
+
+        public void Apply(IDamagable target)
+        {
+            target.TakeDamage(damageAmount);
+        }
+
+        public void Cancel()
+        {
+            //no-op
+        }
+    }
+
+    [Serializable]
+    internal class DamageOverTimeEffect : AbilityEffect, IEffect<IDamagable>
+    {
+        public float duration = 5f;
+        public float tickInterval = 1f;
+        public int damagePerTick;
+
+        private IntervalTimer _timer;
+        private IDamagable _currentTarget;
+        
+        public void Apply(IDamagable target)
+        {
+            _currentTarget = target;
+            _timer = new IntervalTimer(duration, tickInterval);
+            _timer.OnInterval = OnInterval;
+            _timer.OnTimerStop = OnStop;
+            _timer.Start();
+        }
+        
+        void OnInterval() => _currentTarget?.TakeDamage(damagePerTick);
+        void OnStop() => Cleanup();
+
+        public void Cancel()
+        {
+            _timer?.Stop();
+            Cleanup();
+        }
+        
+        // TODO: Improve by keeping timer cached.
+        private void Cleanup()
+        {
+            _timer = null; 
+            _currentTarget = null;
+        }
+
+        public override void Execute(GameObject caster, GameObject target)
+        {
+            Debug.Log($"{caster.name} inflicts {damagePerTick} DMG." +
+                      $" Every {tickInterval} to {target.name}!" +
+                      $" for {duration}s !!");
         }
     }
     
