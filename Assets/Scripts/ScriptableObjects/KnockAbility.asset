@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a9b8c91dc38410a8480fcde6af8a1fd, type: 3}
   m_Name: KnockAbility
   m_EditorClassIdentifier: Assembly-CSharp::Abilities.AbilityData
-  label: Knock-Knock
+  label: KnockAbility
   effects:
   - rid: 1150315811931422908
   castTime: 2
-  vfxPrefab: {fileID: 0}
+  vfxPrefab: {fileID: 8013560777750307755, guid: d3f7034db37eaf44993ee105aefdb7e2, type: 3}
   references:
     version: 2
     RefIds:
