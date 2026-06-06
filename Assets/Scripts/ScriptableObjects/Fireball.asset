@@ -15,7 +15,7 @@ MonoBehaviour:
   label: Fireball
   effects:
   - rid: 1150315793769299969
-  - rid: 1150315793769300037
+  - rid: 1150315793769300042
   castTime: 2
   vfxPrefab: {fileID: 8013560777750307755, guid: d3f7034db37eaf44993ee105aefdb7e2, type: 3}
   references:
@@ -25,7 +25,7 @@ MonoBehaviour:
       type: {class: KnockbackEffect, ns: Abilities, asm: Assembly-CSharp}
       data:
         force: 5
-    - rid: 1150315793769300037
+    - rid: 1150315793769300042
       type: {class: DamageEffect, ns: Abilities, asm: Assembly-CSharp}
       data:
-        amount: 50
+        damageAmount: 10
