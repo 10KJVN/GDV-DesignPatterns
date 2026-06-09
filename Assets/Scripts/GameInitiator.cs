@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Disposables;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -22,6 +23,12 @@ public class GameInitiator : MonoBehaviour
     [SerializeField] private LevelManager _levelManager;
     [SerializeField] private LoadingScreen _loadingScreen;
     [SerializeField] private Player _player;
+    //[SerializeField] private Enemy _enemy;
+
+    // A list to hold all the enemies
+    private List<Enemy> _enemies = new();
+
+    private SpellBuilder _spellBuilder = new();
     private Spell _spell;
 
     [SerializeField] private Transform[] randomStartPositions;
@@ -68,13 +75,39 @@ public class GameInitiator : MonoBehaviour
 
     // Turning on our services e.g. persistent systems.
     private async Awaitable InitializeObjects()
-    { }
+    {
+        var build = ScriptableObject.CreateInstance<Spell>();
+        _spellBuilder
+            .WithName(build.Name = "yessirski")
+            .WithCost(build.Cost = 10)
+            .WithDamage(build.Damage = 30)
+            //.WithSpeed(build.Speed = 3.5f)
+            .Build();
+        
+        _spell = build;
+    }
     
     // Loading in our Entities / Gameplay Objects
     private async Awaitable CreateObjects()
     {
         _background = Instantiate(_background);
         _player = Instantiate(_player);
+
+        // Create some enemies
+        for (int i = 0; i < 1; i++)
+        {
+            _enemies.Add(new Enemy());
+        }
+
+        foreach (Enemy enemy in _enemies)
+        {
+            var enemyGo = new GameObject("TestEnemy");
+            enemyGo.AddComponent<Enemy>();
+        }
+        
+        // GameObject enemyGO = new GameObject("TestEnemy");
+        // Enemy enemy = enemyGO.AddComponent<Enemy>();
+        //_enemy = enemy;
 
         //TODO: LevelUI, Obstacles
     }
@@ -84,13 +117,6 @@ public class GameInitiator : MonoBehaviour
     {
         // _player.MoveToPosition();
         // _player.SetStartingElement();
-        
-        _spell = new Spell.Builder()
-            .WithName("MiBombo")
-            .WithHealth(100)
-            .WithSpeed(5)
-            .WithDamage(10)
-            .Build();
         
         // level and ui logic
         SceneManager.LoadScene("Level", LoadSceneMode.Additive);
@@ -102,6 +128,6 @@ public class GameInitiator : MonoBehaviour
         // Show UI animation e.g. stage 1, stage 2 etc.
         // rest of game flow
 
-        _spell.Cast();
+        _spell.Cast(_mainCamera.transform);
     }
 }

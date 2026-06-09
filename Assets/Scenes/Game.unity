@@ -170,7 +170,7 @@ MonoBehaviour:
   _levelManager: {fileID: 497284583194251454, guid: 6e537667ed9d42448a76f10ee6a4218c, type: 3}
   _loadingScreen: {fileID: 910953760449861724, guid: f6792cb9991668943b2e077268f55e23, type: 3}
   _player: {fileID: 6893969658464857213, guid: 0f0096a39444f7f47911c6519b15385a, type: 3}
-  _spell: {fileID: 7363512944388579438, guid: ab734cc8822f11a479561c7ea46b0235, type: 3}
+  randomStartPositions: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

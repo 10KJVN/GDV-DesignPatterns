@@ -125,6 +125,8 @@ GameObject:
   - component: {fileID: 7508134778510944188}
   - component: {fileID: 6893969658464857213}
   - component: {fileID: 8568682737100820221}
+  - component: {fileID: 2195653470018821708}
+  - component: {fileID: 4645983569009699535}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -160,10 +162,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8511fc5682c454eb1f575fd0128663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+  hotbar:
+  - castSfx: {fileID: 0}
+    castVfx: {fileID: 5228451660820496058, guid: 6af47bdd2de129a40a794d8fd94f5a32, type: 3}
+    runningVfx: {fileID: 6785434633926323560, guid: d3f7034db37eaf44993ee105aefdb7e2, type: 3}
+    effects:
+    - rid: -2
+    - rid: -2
+    targetingStrategy:
+      rid: -2
+  targetingManager: {fileID: 4645983569009699535}
   spells:
   - {fileID: 11400000, guid: 2917f9793d7701c449d71aba70715210, type: 2}
   - {fileID: 11400000, guid: b27e1b2edb5ca7941bae649b1361fc51, type: 2}
   - {fileID: 11400000, guid: cc416472b173a3f48a6edbed8a1e8d45, type: 2}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!54 &8568682737100820221
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -191,3 +208,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2195653470018821708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5102854781617968967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42731f16b4524015b3e2db89953d261f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Abilities.AbilityExecutor
+  ability: {fileID: 11400000, guid: d6eead867ab71e846b41cedcc04de50b, type: 2}
+  target: {fileID: 0}
+--- !u!114 &4645983569009699535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5102854781617968967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04153c717f884e19888a5d9ff4470d3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Strategies.TargetingManager
+  input: {fileID: 0}
+  cam: {fileID: 0}

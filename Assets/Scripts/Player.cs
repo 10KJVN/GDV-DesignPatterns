@@ -1,9 +1,26 @@
 using System;
+using Abilities;
+using Strategies;
+using Extensions;
 using UnityEngine;
 
+[RequireComponent(typeof(TargetingManager))]
 public class Player : MonoBehaviour
 {
+    public Ability[] hotbar;
+    public TargetingManager targetingManager;
+    
     [SerializeField] private SpellStrategy[] spells;
+
+    private void OnEnable()
+    {
+        HeadsUpDisplay.OnButtonPressed += CastSpell;
+    }
+
+    private void OnDisable()
+    {
+        HeadsUpDisplay.OnButtonPressed -= CastSpell;
+    }
 
     void Start()
     {
@@ -13,24 +30,24 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        for (int i = 0; i < hotbar.Length; i++)
         {
-            CastSpell(0);
-        }
-        
-        else if (Input.GetMouseButtonDown(1))
-        {
-            CastSpell(1);
-        }
-        
-        else if (Input.GetMouseButtonDown(2))
-        {
-            CastSpell(2);
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+            {
+                Cast(hotbar[i]);
+            }
         }
     }
 
-    void CastSpell(int index)
+    void Cast(Ability ability)
     {
-        spells[index].CastSpell(transform);
+        ability.Target(targetingManager);
+
+        if (ability.castSfx)
+        {
+            AudioSource.PlayClipAtPoint(ability.castSfx, transform.position);
+        }
     }
+
+    void CastSpell(int index) => spells[index].CastSpell(transform);
 }
