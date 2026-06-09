@@ -94,7 +94,7 @@ public class GameInitiator : MonoBehaviour
         _player = Instantiate(_player);
 
         // Create some enemies
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 1; i++)
         {
             _enemies.Add(new Enemy());
         }
@@ -102,7 +102,7 @@ public class GameInitiator : MonoBehaviour
         foreach (Enemy enemy in _enemies)
         {
             var enemyGo = new GameObject("TestEnemy");
-            //enem
+            enemyGo.AddComponent<Enemy>();
         }
         
         // GameObject enemyGO = new GameObject("TestEnemy");

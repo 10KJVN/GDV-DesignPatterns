@@ -264,7 +264,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 618b0e3f6c65dd247a4a016150006c57, type: 3}
   m_Name: 
@@ -417,6 +417,7 @@ GameObject:
   - component: {fileID: 524604258}
   - component: {fileID: 524604259}
   - component: {fileID: 524604260}
+  - component: {fileID: 524604261}
   m_Layer: 0
   m_Name: Player_Capsule
   m_TagString: Player
@@ -598,13 +599,29 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 524604251}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04153c717f884e19888a5d9ff4470d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Strategies.TargetingManager
   input: {fileID: 11400000, guid: b6d34cb234ded4d429c9ed44fb3c60e2, type: 2}
   cam: {fileID: 330585545}
+--- !u!114 &524604261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524604251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35022a4f8d60e9f438bed036af11909c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  jumpForce: {x: 0, y: 0}
+  moveSpeed: 5
+  playerModel: {fileID: 524604255}
+  input: {fileID: 11400000, guid: b6d34cb234ded4d429c9ed44fb3c60e2, type: 2}
 --- !u!1 &655401949
 GameObject:
   m_ObjectHideFlags: 0

@@ -56,12 +56,6 @@ namespace Abilities
     {
         public int damageAmount;
         
-        // public override void Execute(GameObject caster, GameObject target)
-        // {
-        //     //target.GetComponent<Health>().ApplyDamage(amount);
-        //     Debug.Log($"{caster.name} dealt {damageAmount} damage to {target.name}");
-        // }
-
         public void Apply(IDamagable target)
         {
             target.TakeDamage(damageAmount);
@@ -131,13 +125,6 @@ namespace Abilities
             _currentTarget = null;
             OnCompleted?.Invoke(this);
         }
-
-        // public override void Execute(GameObject caster, GameObject target)
-        // {
-        //     Debug.Log($"{caster.name} inflicts {damagePerTick} DMG." +
-        //               $" Every {tickInterval} to {target.name}!" +
-        //               $" for {duration}s !!");
-        // }
     }
     
     [Serializable]
