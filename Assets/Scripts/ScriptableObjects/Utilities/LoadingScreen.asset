@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e422aca0d3ee434bbf297bc74cc7492b, type: 3}
+  m_Name: LoadingScreen
+  m_EditorClassIdentifier: Assembly-CSharp::LoadingScreen
+  _loadingSlider: {fileID: 8634857874141446060, guid: 8c71a2f5398bcdf40bbca1eb27636f29, type: 3}
+  _loadingScreenCanvas: {fileID: 7092670413390123287, guid: f6792cb9991668943b2e077268f55e23, type: 3}

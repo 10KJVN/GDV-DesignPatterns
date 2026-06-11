@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoadingScreen : MonoBehaviour, ILoadingScreen
+[CreateAssetMenu(fileName = "LoadingScreen", menuName = "ScriptableObjects/LoadingScreen")]
+public class LoadingScreen : ScriptableObject, ILoadingScreen
 {
     [SerializeField] private Slider _loadingSlider;
     [SerializeField] private Canvas _loadingScreenCanvas;

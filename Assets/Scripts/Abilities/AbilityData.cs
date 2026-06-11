@@ -35,24 +35,24 @@ namespace Abilities
         public abstract void Execute(GameObject caster, GameObject target);
     }
 
-    public interface IEffectFactory<TTarget>
+    public interface IEffectFactory
     {
-        IEffect<TTarget> Create();
+        IEffect Create();
     }
     
     [Serializable]
-    public class DamageEffectFactory : IEffectFactory<IDamagable>
+    public class DamageEffectFactory : IEffectFactory
     {
         public int damageAmount = 10;
 
-        public IEffect<IDamagable> Create()
+        public IEffect Create()
         {
             return new DamageEffect { damageAmount = damageAmount };
         }
     }
 
     [Serializable]
-    public struct DamageEffect : IEffect<IDamagable>
+    public struct DamageEffect : IEffect
     {
         public int damageAmount;
         
@@ -73,17 +73,17 @@ namespace Abilities
             OnCompleted?.Invoke(this);
         }
 
-        public event Action<IEffect<IDamagable>> OnCompleted;
+        public event Action<IEffect> OnCompleted;
     }
 
     [Serializable]
-    public class DamageOverTimeEffectFactory : IEffectFactory<IDamagable>
+    public class DamageOverTimeEffectFactory : IEffectFactory
     {
         public float duration = 5;
         public float tickInterval = 1f;
         public int damagePerTick = 5;
         
-        public IEffect<IDamagable> Create()
+        public IEffect Create()
         {
             return new DamageOverTimeEffect
             {
@@ -95,7 +95,7 @@ namespace Abilities
     }
 
     [Serializable]
-    public struct DamageOverTimeEffect : IEffect<IDamagable>
+    public struct DamageOverTimeEffect : IEffect
     {
         public float duration;
         public float tickInterval;
@@ -122,7 +122,7 @@ namespace Abilities
             Cleanup();
         }
 
-        public event Action<IEffect<IDamagable>> OnCompleted;
+        public event Action<IEffect> OnCompleted;
 
         // TODO: Improve by keeping timer cached.
         private void Cleanup()

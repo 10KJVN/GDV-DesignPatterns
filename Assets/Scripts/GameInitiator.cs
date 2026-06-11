@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Abilities;
 using Disposables;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,15 +16,17 @@ using UnityEngine.SceneManagement;
 
 public class GameInitiator : MonoBehaviour
 {
-    // TODO: Serialized Ref for each class
+    // TODO: Convert class refs to GameObject refs
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private Light _mainDirectionalLight;
     [SerializeField] private EventSystem _mainEventSystem;
     [SerializeField] private GameObject _background;
-    [SerializeField] private LevelManager _levelManager;
+    //[SerializeField] private GameObject _levelPrefab;
     [SerializeField] private LoadingScreen _loadingScreen;
     [SerializeField] private Player _player;
-    //[SerializeField] private Enemy _enemy;
+
+    [Header("Enemy References")]
+    [SerializeField] private GameObject enemyPrefab;
 
     // A list to hold all the enemies
     private List<Enemy> _enemies = new();
@@ -68,9 +71,8 @@ public class GameInitiator : MonoBehaviour
         _mainDirectionalLight = Instantiate(_mainDirectionalLight);
         _mainEventSystem = Instantiate(_mainEventSystem);
         
-        //TODO: Spawner, lvlManager
+        //TODO: Bind relevant GameObjects refs to variables
         _loadingScreen = Instantiate(_loadingScreen);
-        //TODO: (OPTIONAL) Dependency Injection.
     }
 
     // Turning on our services e.g. persistent systems.
@@ -81,6 +83,7 @@ public class GameInitiator : MonoBehaviour
             .WithName(build.Name = "yessirski")
             .WithCost(build.Cost = 10)
             .WithDamage(build.Damage = 30)
+            .WithFactory(new DamageEffectFactory())
             //.WithSpeed(build.Speed = 3.5f)
             .Build();
         
@@ -94,20 +97,16 @@ public class GameInitiator : MonoBehaviour
         _player = Instantiate(_player);
 
         // Create some enemies
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 1; i++)
         {
-            _enemies.Add(new Enemy());
+            _enemies.Add(new Enemy(enemyPrefab));
         }
 
         foreach (Enemy enemy in _enemies)
         {
-            var enemyGo = new GameObject("TestEnemy");
-            //enem
+            var enemyGo = Resources.Load<GameObject>("TestEnemy");
+            enemyGo = new GameObject("TestEnemy");
         }
-        
-        // GameObject enemyGO = new GameObject("TestEnemy");
-        // Enemy enemy = enemyGO.AddComponent<Enemy>();
-        //_enemy = enemy;
 
         //TODO: LevelUI, Obstacles
     }

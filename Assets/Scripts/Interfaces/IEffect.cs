@@ -1,8 +1,8 @@
 using System;
 
-public interface IEffect<TTarget>
+public interface IEffect
 {
-    void Apply(TTarget target);
-    void Cancel();
-    event Action<IEffect<TTarget>> OnCompleted;
+    void Apply(IDamagable target);
+    //void Cancel();
+    //event Action<IEffect<TTarget>> OnCompleted;
 }

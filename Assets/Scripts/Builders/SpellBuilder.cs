@@ -1,3 +1,4 @@
+using Abilities;
 using UnityEngine;
 
 public class SpellBuilder
@@ -8,7 +9,9 @@ public class SpellBuilder
     private float _speed = 3;
 
     // TODO: Add Build functions for adding a Visual
+    IEffectFactory damageEffect;
 
+    //IEffectFactory<DamageOverTimeEffect> dotFactory;
     public SpellBuilder WithName(string name)
     {
         _name = name;
@@ -33,6 +36,12 @@ public class SpellBuilder
         return this;
     }
 
+    public SpellBuilder WithFactory(IEffectFactory damageEffect)
+    {
+        this.damageEffect = damageEffect;
+        return this;
+    }
+
     public Spell Build()
     {
         //var spell = new Spell();
@@ -44,6 +53,7 @@ public class SpellBuilder
         spell.Cost = _cost;
         spell.Damage = _damage;
         spell.Speed = _speed;
+        //spell.damageEffect = ScriptableObject.CreateInstance<AbilityData>();
     
         return spell;
     }

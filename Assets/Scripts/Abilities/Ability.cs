@@ -16,7 +16,7 @@ namespace Abilities
         // caster information maybe
         
         [Header("Effects")]
-        [SerializeReference] public List<IEffectFactory<IDamagable>> effects = new();
+        [SerializeReference] public List<IEffectFactory> effects = new();
         public List<AbilityData> effectData = new(); // TODO: Refactor to WORKING ScriptableObject
         
         [Header("Targeting")]
@@ -58,5 +58,22 @@ namespace Abilities
                 Object.Destroy(runningVfxInstance, 3f);
             }
         }
+    }
+}
+
+public abstract class Test
+{
+    protected GameObject instance;
+    public Test(GameObject obj)
+    {
+        instance = obj;
+    }
+}
+
+public class SubTest : Test
+{
+    public SubTest(GameObject obj) : base(obj)
+    {
+
     }
 }
