@@ -1,6 +1,10 @@
 using Abilities;
 using UnityEngine;
 
+/// <summary>
+/// A component that belongs to the targeting domain within the ability system framework.
+/// </summary>
+
 public class ProjectileController : MonoBehaviour
 {
     Ability ability;

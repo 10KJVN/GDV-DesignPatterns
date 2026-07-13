@@ -15,15 +15,15 @@ using UnityEngine.SceneManagement;
 
 public class GameInitiator : MonoBehaviour
 {
-    // TODO: Serialized Ref for each class
+    // Prefab references
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private Light _mainDirectionalLight;
     [SerializeField] private EventSystem _mainEventSystem;
     [SerializeField] private GameObject _background;
+
     [SerializeField] private LevelManager _levelManager;
     [SerializeField] private LoadingScreen _loadingScreen;
     [SerializeField] private Player _player;
-    //[SerializeField] private Enemy _enemy;
 
     // A list to hold all the enemies
     private List<Enemy> _enemies = new();
@@ -70,7 +70,6 @@ public class GameInitiator : MonoBehaviour
         
         //TODO: Spawner, lvlManager
         _loadingScreen = Instantiate(_loadingScreen);
-        //TODO: (OPTIONAL) Dependency Injection.
     }
 
     // Turning on our services e.g. persistent systems.
@@ -109,7 +108,7 @@ public class GameInitiator : MonoBehaviour
         // Enemy enemy = enemyGO.AddComponent<Enemy>();
         //_enemy = enemy;
 
-        //TODO: LevelUI, Obstacles
+        //TODO: Enemies
     }
     
     // Setting up our objects
