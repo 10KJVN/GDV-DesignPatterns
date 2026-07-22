@@ -13,6 +13,8 @@ public class EnemyManager : IEntity
     private MeshRenderer _meshRenderer;
     private MeshFilter _meshFilter;
 
+    [SerializeField] private Mesh targetMesh;
+
     public void OnStart()
     {
         Debug.Log("IVE STARTED");
@@ -27,10 +29,27 @@ public class EnemyManager : IEntity
     private void ConfigureUnityComponents()
     {
         _visual = new GameObject(_name);
-        _visual.AddComponent<Rigidbody>();
-        _visual.AddComponent<BoxCollider>();
 
-        //this._triggerCollider
+        _rb = _visual.AddComponent<Rigidbody>();
+        _rb.isKinematic = true;
+        _rb.useGravity = false;
 
+        _boxCollider = _visual.AddComponent<BoxCollider>();
+    }
+
+    public void ConfigureMesh(Mesh target)
+    {
+        _meshFilter = _visual.AddComponent<MeshFilter>();
+        _meshFilter.mesh = target;
+
+        Debug.Log("Mesh configured sucessfully.");
+    }
+
+    public void AssignMaterial(Material target)
+    {
+        _meshRenderer = _visual.AddComponent<MeshRenderer>();
+        _meshRenderer.material = target;
+
+        Debug.Log("Material assigned");
     }
 }   

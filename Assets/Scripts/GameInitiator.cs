@@ -25,11 +25,17 @@ public class GameInitiator : MonoBehaviour
     [SerializeField] private LoadingScreen _loadingScreen;
     [SerializeField] private Player _player;
 
+    private EnemyManager _enemyManager;
+
     // A list to hold all the enemies
     private List<Enemy> _enemies = new();
 
     private SpellBuilder _spellBuilder = new();
     private Spell _spell;
+
+    [Header("Enemy Config")]
+    [SerializeField] private Mesh enemyMesh;
+    [SerializeField] private Material enemyMaterial;
 
     [SerializeField] private Transform[] randomStartPositions;
 
@@ -84,6 +90,8 @@ public class GameInitiator : MonoBehaviour
             .Build();
         
         _spell = build;
+
+        _enemyManager = new();
     }
     
     // Loading in our Entities / Gameplay Objects
@@ -91,6 +99,11 @@ public class GameInitiator : MonoBehaviour
     {
         _background = Instantiate(_background);
         _player = Instantiate(_player);
+
+        _enemyManager.OnStart();
+
+        _enemyManager.ConfigureMesh(enemyMesh);
+        _enemyManager.AssignMaterial(enemyMaterial);
 
         // Create some enemies
         for (int i = 0; i < 1; i++)
@@ -104,8 +117,8 @@ public class GameInitiator : MonoBehaviour
             enemyGo.AddComponent<Enemy>();
         }
         
-        // GameObject enemyGO = new GameObject("TestEnemy");
-        // Enemy enemy = enemyGO.AddComponent<Enemy>();
+        //GameObject enemyGO = new GameObject("TestEnemy");
+        //Enemy enemy = enemyGO.AddComponent<Enemy>();
         //_enemy = enemy;
 
         //TODO: Enemies
