@@ -28,7 +28,7 @@ public class GameInitiator : MonoBehaviour
     [SerializeField] private bool _gameStarted;
 
     private EnemyManager _enemyManager;
-    private List<EnemyManager> _managedEnemies;
+    //private List<EnemyManager> _managedEnemies;
 
     // A list to hold all the enemies
     private List<Enemy> _enemies = new();
@@ -94,7 +94,8 @@ public class GameInitiator : MonoBehaviour
 
         _spell = build;
 
-        //_enemyManager = new();
+        _enemyManager = new();
+        //_managedEnemies = new();
     }
 
     // Loading in our Entities / Gameplay Objects
@@ -103,15 +104,12 @@ public class GameInitiator : MonoBehaviour
         _background = Instantiate(_background);
         _player = Instantiate(_player);
 
-        for (int i = 0; i < 1; i++)
-        {
-            _managedEnemies.Add(new EnemyManager());
-        }
-
         _enemyManager.OnStart();
 
         _enemyManager.ConfigureMesh(enemyMesh);
         _enemyManager.AssignMaterial(enemyMaterial);
+
+        //_managedEnemies.Add(_enemyManager);
 
         // Create some enemies
         for (int i = 0; i < 1; i++)
@@ -152,17 +150,18 @@ public class GameInitiator : MonoBehaviour
         _spell.Cast(_mainCamera.transform);
     }
 
-    private void Update()
-    {
-        if (!_gameStarted)
-            return;
+    //private async void Update()
+    //{
+    //    //if (!_gameStarted)
+    //    //    return;
 
-        while (_gameStarted)
-        {
-            foreach (EnemyManager e in _managedEnemies)
-            {
-
-            }
-        }
-    }
+    //    while (_gameStarted == true)
+    //    {
+    //        //foreach (EnemyManager e in _managedEnemies)
+    //        //{
+    //        //    Debug.Log($"{e} hey");
+    //        //}
+    //        Debug.Log("STARTED IS TRUE");
+    //    }
+    //}
 }
