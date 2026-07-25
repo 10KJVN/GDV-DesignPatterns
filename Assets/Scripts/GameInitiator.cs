@@ -28,6 +28,9 @@ public class GameInitiator : MonoBehaviour
 
     [SerializeField] private bool _gameStarted;
 
+    [Header("Player Config")]
+    [SerializeField] private Mesh playerMesh;
+    [SerializeField] private Material playerMaterial;
     private PlayerManager _playerManager;
 
     private EnemyManager _enemyManager;
@@ -111,6 +114,8 @@ public class GameInitiator : MonoBehaviour
         _player = Instantiate(_player);
 
         _playerManager.OnStart();
+        _playerManager.ConfigureMesh(playerMesh);
+        _playerManager.AssignMaterial(playerMaterial);
 
         _enemyManager.OnStart();
 
