@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Disposables;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -28,7 +29,7 @@ public class GameInitiator : MonoBehaviour
     [SerializeField] private bool _gameStarted;
 
     private EnemyManager _enemyManager;
-    //private List<EnemyManager> _managedEnemies;
+    private List<EnemyManager> _managedEnemies;
 
     // A list to hold all the enemies
     private List<Enemy> _enemies = new();
@@ -63,6 +64,7 @@ public class GameInitiator : MonoBehaviour
 
             Debug.Log("Finished loading.");
             await BeginGame();
+            OnTick(Time.deltaTime);
         }
 
         catch (Exception e) { Debug.Log($"Failed loading: {e}"); }
@@ -95,7 +97,7 @@ public class GameInitiator : MonoBehaviour
         _spell = build;
 
         _enemyManager = new();
-        //_managedEnemies = new();
+        _managedEnemies = new();
     }
 
     // Loading in our Entities / Gameplay Objects
@@ -109,7 +111,7 @@ public class GameInitiator : MonoBehaviour
         _enemyManager.ConfigureMesh(enemyMesh);
         _enemyManager.AssignMaterial(enemyMaterial);
 
-        //_managedEnemies.Add(_enemyManager);
+        _managedEnemies.Add(_enemyManager);
 
         // Create some enemies
         for (int i = 0; i < 1; i++)
@@ -138,6 +140,8 @@ public class GameInitiator : MonoBehaviour
 
         // level and ui logic
         SceneManager.LoadScene("Level", LoadSceneMode.Additive);
+        print(_managedEnemies.Count + " enemies");
+
     }
 
     // Here you decide the game's flow
@@ -150,18 +154,11 @@ public class GameInitiator : MonoBehaviour
         _spell.Cast(_mainCamera.transform);
     }
 
-    //private async void Update()
-    //{
-    //    //if (!_gameStarted)
-    //    //    return;
+    // TODO: find a way to actually make it tick?
+    private async void OnTick(float dt)
+    {
+        dt = Time.deltaTime;
+        print(dt + " BeginGame fired the first call.");
 
-    //    while (_gameStarted == true)
-    //    {
-    //        //foreach (EnemyManager e in _managedEnemies)
-    //        //{
-    //        //    Debug.Log($"{e} hey");
-    //        //}
-    //        Debug.Log("STARTED IS TRUE");
-    //    }
-    //}
+    }
 }
