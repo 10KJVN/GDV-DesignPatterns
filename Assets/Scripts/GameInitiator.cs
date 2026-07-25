@@ -28,6 +28,8 @@ public class GameInitiator : MonoBehaviour
 
     [SerializeField] private bool _gameStarted;
 
+    private PlayerManager _playerManager;
+
     private EnemyManager _enemyManager;
     private List<EnemyManager> _managedEnemies;
 
@@ -96,6 +98,8 @@ public class GameInitiator : MonoBehaviour
 
         _spell = build;
 
+        _playerManager = new();
+
         _enemyManager = new();
         _managedEnemies = new();
     }
@@ -105,6 +109,8 @@ public class GameInitiator : MonoBehaviour
     {
         _background = Instantiate(_background);
         _player = Instantiate(_player);
+
+        _playerManager.OnStart();
 
         _enemyManager.OnStart();
 
