@@ -25,7 +25,10 @@ public class GameInitiator : MonoBehaviour
     [SerializeField] private LoadingScreen _loadingScreen;
     [SerializeField] private Player _player;
 
+    [SerializeField] private bool _gameStarted;
+
     private EnemyManager _enemyManager;
+    private List<EnemyManager> _managedEnemies;
 
     // A list to hold all the enemies
     private List<Enemy> _enemies = new();
@@ -41,7 +44,7 @@ public class GameInitiator : MonoBehaviour
 
     private async void Start()
     {
-        try 
+        try
         {
             BindObjects();
             Debug.Log("Loading...");
@@ -57,13 +60,13 @@ public class GameInitiator : MonoBehaviour
                 await PrepareGame();
                 loadingScreenDisposable.SetLoadingBarPercent(1f);
             }
-            
+
             Debug.Log("Finished loading.");
             await BeginGame();
         }
-        
+
         catch (Exception e) { Debug.Log($"Failed loading: {e}"); }
-        
+
         finally { Debug.Log("Game Launched successfully."); }
     }
 
@@ -73,7 +76,7 @@ public class GameInitiator : MonoBehaviour
         _mainCamera = Instantiate(_mainCamera);
         _mainDirectionalLight = Instantiate(_mainDirectionalLight);
         _mainEventSystem = Instantiate(_mainEventSystem);
-        
+
         //TODO: Spawner, lvlManager
         _loadingScreen = Instantiate(_loadingScreen);
     }
@@ -88,17 +91,22 @@ public class GameInitiator : MonoBehaviour
             .WithDamage(build.Damage = 30)
             //.WithSpeed(build.Speed = 3.5f)
             .Build();
-        
+
         _spell = build;
 
-        _enemyManager = new();
+        //_enemyManager = new();
     }
-    
+
     // Loading in our Entities / Gameplay Objects
     private async Awaitable CreateObjects()
     {
         _background = Instantiate(_background);
         _player = Instantiate(_player);
+
+        for (int i = 0; i < 1; i++)
+        {
+            _managedEnemies.Add(new EnemyManager());
+        }
 
         _enemyManager.OnStart();
 
@@ -116,30 +124,45 @@ public class GameInitiator : MonoBehaviour
             var enemyGo = new GameObject("TestEnemy");
             enemyGo.AddComponent<Enemy>();
         }
-        
+
         //GameObject enemyGO = new GameObject("TestEnemy");
         //Enemy enemy = enemyGO.AddComponent<Enemy>();
         //_enemy = enemy;
 
         //TODO: Enemies
     }
-    
+
     // Setting up our objects
     private async Awaitable PrepareGame()
     {
         // _player.MoveToPosition();
         // _player.SetStartingElement();
-        
+
         // level and ui logic
         SceneManager.LoadScene("Level", LoadSceneMode.Additive);
     }
-    
+
     // Here you decide the game's flow
     private async Awaitable BeginGame()
     {
+        _gameStarted = true;
         // Show UI animation e.g. stage 1, stage 2 etc.
         // rest of game flow
 
         _spell.Cast(_mainCamera.transform);
+    }
+
+    private void Update()
+    {
+        if (!_gameStarted)
+            return;
+
+        while (_gameStarted)
+        {
+            foreach (EnemyManager e in _managedEnemies)
+            {
+
+            }
+        }
     }
 }

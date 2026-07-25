@@ -35,6 +35,9 @@ public class EnemyManager : IEntity
         _rb.useGravity = false;
 
         _boxCollider = _visual.AddComponent<BoxCollider>();
+        _boxCollider.size = new Vector3(1f, 1.8f, 1f);
+
+        ConfigureTrigger();
     }
 
     public void ConfigureMesh(Mesh target)
@@ -51,5 +54,20 @@ public class EnemyManager : IEntity
         _meshRenderer.material = target;
 
         Debug.Log("Material assigned");
+    }
+
+    private void ConfigureTrigger()
+    {
+        _triggerCollider = _visual.AddComponent<BoxCollider>();
+        _triggerCollider.isTrigger = true;
+        _triggerCollider.size = new Vector3(1.5f, 1.5f, 1.5f);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log($"I've hit the {other} player!"); 
+        }
     }
 }   
