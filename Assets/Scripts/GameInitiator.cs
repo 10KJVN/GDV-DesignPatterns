@@ -125,10 +125,6 @@ public class GameInitiator : MonoBehaviour
             enemyGo.AddComponent<Enemy>();
         }
 
-        //GameObject enemyGO = new GameObject("TestEnemy");
-        //Enemy enemy = enemyGO.AddComponent<Enemy>();
-        //_enemy = enemy;
-
         //TODO: Enemies
     }
 
