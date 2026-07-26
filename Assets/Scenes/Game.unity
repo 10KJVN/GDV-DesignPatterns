@@ -176,6 +176,7 @@ MonoBehaviour:
   enemyMaterial: {fileID: 2100000, guid: 872d56d15ff47d349aec6dce8abf2db7, type: 2}
   randomStartPositions: []
   _canvas: {fileID: 7477895969596209936, guid: 7d2545506e19e0b4192f43645425639f, type: 3}
+  _btnSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -50,6 +50,7 @@ public class GameInitiator : MonoBehaviour
 
     [SerializeField] private HeadsUpDisplay2 _hud;
     [SerializeField] private GameObject _canvas;
+    [SerializeField] private Sprite _btnSprite;
     private string _btnText = "Fire";
 
     private async void Start()
@@ -144,6 +145,7 @@ public class GameInitiator : MonoBehaviour
         //TODO: Enemies
 
         _hud.CreateButtons(_canvas.transform, _btnText);
+        _hud.AssignSprite(_btnSprite);
     }
 
     // Setting up our objects
