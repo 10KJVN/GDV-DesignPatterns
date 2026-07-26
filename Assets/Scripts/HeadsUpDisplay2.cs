@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// This class takes care of creating the buttons to cast spells.
+/// It assigns listeners and executes the spell on that referenced index.
+/// </summary>
+
 public class HeadsUpDisplay2 : IEntity
 {
     private List<Button> buttons = new();
@@ -57,8 +62,6 @@ public class HeadsUpDisplay2 : IEntity
     {
         buttons.Add(fireBtn);
     }
-
-    //public void
 
     private void HandleButtonPress(int index) => OnButtonPressed2(index);
 

@@ -31,6 +31,7 @@ public class GameInitiator : MonoBehaviour
     [Header("Player Config")]
     [SerializeField] private Mesh playerMesh;
     [SerializeField] private Material playerMaterial;
+    [SerializeField] private SpellStrategy[] spells;
     private PlayerManager _playerManager;
 
     private EnemyManager _enemyManager;
@@ -48,6 +49,7 @@ public class GameInitiator : MonoBehaviour
 
     [SerializeField] private Transform[] randomStartPositions;
 
+    [Header ("UI")]
     [SerializeField] private HeadsUpDisplay2 _hud;
     [SerializeField] private GameObject _canvas;
     [SerializeField] private Sprite _btnSprite;
