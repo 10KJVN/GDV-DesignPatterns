@@ -160,6 +160,8 @@ public class GameInitiator : MonoBehaviour
         SceneManager.LoadScene("Level", LoadSceneMode.Additive);
         print(_managedEnemies.Count + " enemies");
 
+        _hud.OnStart();
+
     }
 
     // Here you decide the game's flow

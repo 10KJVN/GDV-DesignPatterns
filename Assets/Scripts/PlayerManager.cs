@@ -29,6 +29,16 @@ public class PlayerManager : IEntity
         HeadsUpDisplay2.OnButtonPressed2 -= CastSpell;
     }
 
+    public PlayerManager()
+    {
+        OnEnable();
+    }
+
+    ~PlayerManager()
+    {
+        OnDisable();
+    }
+
     public void OnStart()
     {
         ConfigureUnityComponents();

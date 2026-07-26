@@ -1,23 +1,31 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HeadsUpDisplay2
+public class HeadsUpDisplay2 : IEntity
 {
-    private Button[] buttons = null;
+    private List<Button> buttons = new();
     private GameObject buttonGO;
     private Image img;
+
+    private Button fireBtn;
 
     public delegate void ButtonPressedEvent (int index);
     public static event ButtonPressedEvent OnButtonPressed2;
 
-    private void Awake()
+    private void AssignListeners()
     {
-        for (int i = 0; i < buttons.Length; i++)
+        for (int i = 0; i < buttons.Count; i++)
         {
             int index = i;
             buttons[i].onClick.AddListener( () => HandleButtonPress(index));
         }
+    }
+    public void OnStart()
+    {
+        RegisterButtonsToArray();
+        AssignListeners();
     }
 
     public void CreateButtons(Transform canvasPos, string btnText)
@@ -41,9 +49,22 @@ public class HeadsUpDisplay2
 
     public void ConfigureButton()
     {
-        Button btn = buttonGO.AddComponent<Button>();
-        btn.targetGraphic = img;
+        fireBtn = buttonGO.AddComponent<Button>();
+        fireBtn.targetGraphic = img;
     }
 
+    private void RegisterButtonsToArray()
+    {
+        buttons.Add(fireBtn);
+    }
+
+    //public void
+
     private void HandleButtonPress(int index) => OnButtonPressed2(index);
+
+
+    public void OnUpdate()
+    {
+        throw new NotImplementedException();
+    }
 }
