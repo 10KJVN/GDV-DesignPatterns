@@ -49,7 +49,10 @@ public class PlayerManager : IEntity
         throw new NotImplementedException();
     }
 
-    private void CastSpell(int index) => spells[index].CastSpell(transform);
+    private void CastSpell(int index)
+    {
+        spells[index].CastSpell(transform);
+    }
 
     private void ConfigureUnityComponents()
     {
