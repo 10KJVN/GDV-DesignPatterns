@@ -24,7 +24,7 @@ public class GameInitiator : MonoBehaviour
 
     [SerializeField] private LevelManager _levelManager;
     [SerializeField] private LoadingScreen _loadingScreen;
-    [SerializeField] private Player _player;
+    //[SerializeField] private Player _player;
 
     [SerializeField] private bool _gameStarted;
 
@@ -47,6 +47,10 @@ public class GameInitiator : MonoBehaviour
     [SerializeField] private Material enemyMaterial;
 
     [SerializeField] private Transform[] randomStartPositions;
+
+    [SerializeField] private HeadsUpDisplay2 _hud;
+    [SerializeField] private GameObject _canvas;
+    private string _btnText = "Fire";
 
     private async void Start()
     {
@@ -105,13 +109,14 @@ public class GameInitiator : MonoBehaviour
 
         _enemyManager = new();
         _managedEnemies = new();
+        _hud = new();
     }
 
     // Loading in our Entities / Gameplay Objects
     private async Awaitable CreateObjects()
     {
         _background = Instantiate(_background);
-        _player = Instantiate(_player);
+        //_player = Instantiate(_player);
 
         _playerManager.OnStart();
         _playerManager.ConfigureMesh(playerMesh);
@@ -137,6 +142,8 @@ public class GameInitiator : MonoBehaviour
         }
 
         //TODO: Enemies
+
+        _hud.CreateButtons(_canvas.transform, _btnText);
     }
 
     // Setting up our objects

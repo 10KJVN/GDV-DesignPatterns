@@ -21,12 +21,12 @@ public class PlayerManager : IEntity
 
     private void OnEnable()
     {
-        HeadsUpDisplay.OnButtonPressed += CastSpell;
+        HeadsUpDisplay2.OnButtonPressed2 += CastSpell;
     }
 
     private void OnDisable()
     {
-        HeadsUpDisplay.OnButtonPressed -= CastSpell;
+        HeadsUpDisplay2.OnButtonPressed2 -= CastSpell;
     }
 
     public void OnStart()
