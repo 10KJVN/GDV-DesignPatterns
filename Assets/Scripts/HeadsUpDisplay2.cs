@@ -25,7 +25,7 @@ public class HeadsUpDisplay2
         buttonGO = new("CodeGeneratedButton");
         RectTransform rectTransform = buttonGO.AddComponent<RectTransform>();
 
-        //rectTransform.SetParent(canvasPos, false);
+        rectTransform.SetParent(canvasPos, false);
         rectTransform.sizeDelta = new Vector2(160, 30);
 
         
@@ -36,7 +36,7 @@ public class HeadsUpDisplay2
     {
         img = buttonGO.AddComponent<Image>();
         img.sprite = target;
-        img.color = Color.white;
+        img.color = Color.red;
     }
 
     public void ConfigureButton()

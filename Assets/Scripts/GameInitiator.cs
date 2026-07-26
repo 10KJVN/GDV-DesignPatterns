@@ -91,6 +91,7 @@ public class GameInitiator : MonoBehaviour
 
         //TODO: Spawner, lvlManager
         _loadingScreen = Instantiate(_loadingScreen);
+        _canvas = Instantiate(_canvas);
     }
 
     // Turning on our services e.g. persistent systems.
@@ -146,6 +147,7 @@ public class GameInitiator : MonoBehaviour
 
         _hud.CreateButtons(_canvas.transform, _btnText);
         _hud.AssignSprite(_btnSprite);
+        _hud.ConfigureButton();
     }
 
     // Setting up our objects
