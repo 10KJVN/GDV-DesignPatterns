@@ -109,7 +109,7 @@ public class GameInitiator : MonoBehaviour
 
         _spell = build;
 
-        _playerManager = new();
+        _playerManager = new(spells);
 
         _enemyManager = new();
         _managedEnemies = new();

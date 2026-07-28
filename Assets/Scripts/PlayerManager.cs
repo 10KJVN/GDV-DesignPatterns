@@ -31,7 +31,7 @@ public class PlayerManager : IEntity
 
     public PlayerManager()
     {
-        OnEnable();
+        //OnEnable();
     }
 
     ~PlayerManager()
@@ -39,8 +39,14 @@ public class PlayerManager : IEntity
         OnDisable();
     }
 
+    public PlayerManager(SpellStrategy[] spellRef)
+    {
+        spells = spellRef;
+    }
+
     public void OnStart()
     {
+        OnEnable();
         ConfigureUnityComponents();
     }
 
@@ -51,7 +57,7 @@ public class PlayerManager : IEntity
 
     private void CastSpell(int index)
     {
-        spells[index].CastSpell(transform);
+        spells[index].CastSpell(_visual.transform);
     }
 
     private void ConfigureUnityComponents()
