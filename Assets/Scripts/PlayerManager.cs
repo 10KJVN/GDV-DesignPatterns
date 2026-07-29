@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerManager : IEntity
 {
     private SpellStrategy[] spells;
-    private Transform transform;
 
     private GameObject _visual;
     private Rigidbody _rb;

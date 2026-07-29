@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Disposables;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -24,7 +23,6 @@ public class GameInitiator : MonoBehaviour
 
     [SerializeField] private LevelManager _levelManager;
     [SerializeField] private LoadingScreen _loadingScreen;
-    //[SerializeField] private Player _player;
 
     [SerializeField] private bool _gameStarted;
 
@@ -120,7 +118,6 @@ public class GameInitiator : MonoBehaviour
     private async Awaitable CreateObjects()
     {
         _background = Instantiate(_background);
-        //_player = Instantiate(_player);
 
         _playerManager.OnStart();
         _playerManager.ConfigureMesh(playerMesh);
