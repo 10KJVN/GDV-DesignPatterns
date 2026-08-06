@@ -34,7 +34,8 @@ public class EnemyManager : IEntity
     private void ConfigureUnityComponents()
     {
         _visual = new GameObject(_name);
-
+        _visual.tag = "Enemy";
+            
         _rb = _visual.AddComponent<Rigidbody>();
         _rb.isKinematic = true;
         _rb.useGravity = false;

@@ -62,6 +62,7 @@ public class PlayerManager : IEntity
     private void ConfigureUnityComponents()
     {
         _visual = new GameObject(_name);
+        _visual.tag = "Player";
 
         _rb = _visual.AddComponent<Rigidbody>();
         _rb.isKinematic = true;
