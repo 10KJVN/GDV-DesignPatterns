@@ -9,7 +9,7 @@ public class EnemyManager : IEntity
     private GameObject _visual = default;
     private Rigidbody _rb;
     private BoxCollider _boxCollider;
-    private BoxCollider _triggerCollider; // TODO: SET TRIGGER IS TRUE AND CONFIG IN CODE.
+    private BoxCollider _triggerCollider;
     private MeshRenderer _meshRenderer;
     private MeshFilter _meshFilter;
 
@@ -24,6 +24,11 @@ public class EnemyManager : IEntity
     public void OnUpdate()
     {
         //throw new NotImplementedException();
+    }
+        
+    private void FixedUpdate()
+    {
+
     }
 
     private void ConfigureUnityComponents()

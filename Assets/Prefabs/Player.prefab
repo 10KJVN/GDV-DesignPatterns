@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 4645983569009699535}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,6 +169,7 @@ MonoBehaviour:
     effects:
     - rid: -2
     - rid: -2
+    effectData: []
     targetingStrategy:
       rid: -2
   targetingManager: {fileID: 4645983569009699535}
