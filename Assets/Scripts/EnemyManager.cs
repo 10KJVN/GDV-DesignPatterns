@@ -23,7 +23,7 @@ public class EnemyManager : IEntity
 
     public void OnUpdate()
     {
-        //throw new NotImplementedException();
+        Debug.Log("Yay the enemy is being updated");
     }
         
     private void FixedUpdate()
@@ -67,6 +67,14 @@ public class EnemyManager : IEntity
         _triggerCollider = _visual.AddComponent<BoxCollider>();
         _triggerCollider.isTrigger = true;
         _triggerCollider.size = new Vector3(1.5f, 1.5f, 1.5f);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("I'm colliding with the player!");
+        }
     }
 
     private void OnTriggerEnter(Collider other)

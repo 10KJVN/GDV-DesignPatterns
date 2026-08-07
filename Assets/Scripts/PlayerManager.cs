@@ -51,7 +51,7 @@ public class PlayerManager : IEntity
 
     public void OnUpdate()
     {
-        throw new NotImplementedException();
+        Debug.Log("Yay the player is being updated");
     }
 
     private void CastSpell(int index)

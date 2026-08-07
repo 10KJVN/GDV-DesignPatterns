@@ -74,7 +74,9 @@ public class GameInitiator : MonoBehaviour
 
             Debug.Log("Finished loading.");
             await BeginGame();
-            OnTick(Time.deltaTime);
+            
+            Debug.Log("Ticking has begun!");
+            // OnTick(Time.deltaTime);
         }
 
         catch (Exception e) { Debug.Log($"Failed loading: {e}"); }
@@ -173,11 +175,23 @@ public class GameInitiator : MonoBehaviour
         _spell.Cast(_mainCamera.transform);
     }
 
+    private void OnTick()
+    {
+        _playerManager.OnUpdate();
+        _enemyManager.OnUpdate();
+    }
+    
+
     // TODO: find a way to actually make it tick?
-    private async void OnTick(float dt)
+    private void OnTick(float dt)
     {
         dt = Time.deltaTime;
-        print(dt + " BeginGame fired the first call.");
+        print(dt);
 
+    }
+
+    private void Update()
+    {
+        OnTick();
     }
 }
