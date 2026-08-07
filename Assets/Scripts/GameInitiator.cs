@@ -179,6 +179,7 @@ public class GameInitiator : MonoBehaviour
     {
         _playerManager.OnUpdate();
         _enemyManager.OnUpdate();
+        _enemyManager.FixedUpdate();
     }
     
 

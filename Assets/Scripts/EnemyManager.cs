@@ -23,12 +23,12 @@ public class EnemyManager : IEntity
 
     public void OnUpdate()
     {
-        Debug.Log("Yay the enemy is being updated");
+        //Debug.Log("Yay the enemy is being updated");
     }
         
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
-
+        
     }
 
     private void ConfigureUnityComponents()
@@ -37,8 +37,9 @@ public class EnemyManager : IEntity
         _visual.tag = "Enemy";
             
         _rb = _visual.AddComponent<Rigidbody>();
-        _rb.isKinematic = true;
+        _rb.isKinematic = false;
         _rb.useGravity = false;
+        _rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
         _boxCollider = _visual.AddComponent<BoxCollider>();
         _boxCollider.size = new Vector3(1f, 1.8f, 1f);
@@ -67,6 +68,12 @@ public class EnemyManager : IEntity
         _triggerCollider = _visual.AddComponent<BoxCollider>();
         _triggerCollider.isTrigger = true;
         _triggerCollider.size = new Vector3(1.5f, 1.5f, 1.5f);
+    }
+
+    private void CheckCollision(Collision collision)
+    {
+        // if (collision.gameObject.CompareTag("Player") || 
+        //     collision.) 
     }
 
     private void OnCollisionEnter(Collision collision)

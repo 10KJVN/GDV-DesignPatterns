@@ -51,7 +51,10 @@ public class PlayerManager : IEntity
 
     public void OnUpdate()
     {
-        Debug.Log("Yay the player is being updated");
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            _visual.transform.position += new Vector3(0, 1, 0);
+        }
     }
 
     private void CastSpell(int index)
@@ -65,8 +68,8 @@ public class PlayerManager : IEntity
         _visual.tag = "Player";
 
         _rb = _visual.AddComponent<Rigidbody>();
-        _rb.isKinematic = true;
-        _rb.useGravity = false;
+        _rb.isKinematic = false;
+        _rb.useGravity = true;
 
         _boxCollider = _visual.AddComponent<BoxCollider>();
         _boxCollider.size = new Vector3(1f, 1.8f, 1f);
