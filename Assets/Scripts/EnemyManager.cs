@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class EnemyManager : IEntity
 {
@@ -31,6 +32,8 @@ public class EnemyManager : IEntity
             if (hit.CompareTag("Spell"))
             {
                 Debug.Log($"I've been hit by: {hit.name}");
+                Object.Destroy(hit.gameObject);
+                break;
             }
         }
     }
