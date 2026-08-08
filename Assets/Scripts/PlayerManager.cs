@@ -53,8 +53,29 @@ public class PlayerManager : IEntity
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
+            _visual.transform.position += new Vector3(0, 0, 1);
+        }
+        
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            _visual.transform.position += new Vector3(0, 0, -1);
+        }
+        
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            _visual.transform.position += new Vector3(-1, 0, 0);
+        }
+        
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            _visual.transform.position += new Vector3(1, 0, 0);
+        }
+        
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
             _visual.transform.position += new Vector3(0, 1, 0);
         }
+        
     }
 
     private void CastSpell(int index)
