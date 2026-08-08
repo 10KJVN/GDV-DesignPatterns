@@ -24,7 +24,7 @@ public class EnemyManager : IEntity
     public void OnUpdate()
     {
         //Debug.Log("Yay the enemy is being updated");
-        Collider[] hitColliders = Physics.OverlapSphere(_visual.transform.position, 3.0f);
+        Collider[] hitColliders = Physics.OverlapSphere(_visual.transform.position, 1.0f);
 
         foreach (var hit in hitColliders)
         {
