@@ -24,6 +24,15 @@ public class EnemyManager : IEntity
     public void OnUpdate()
     {
         //Debug.Log("Yay the enemy is being updated");
+        Collider[] hitColliders = Physics.OverlapSphere(_visual.transform.position, 3.0f);
+
+        foreach (var hit in hitColliders)
+        {
+            if (hit.CompareTag("Spell"))
+            {
+                Debug.Log($"I've been hit by: {hit.name}");
+            }
+        }
     }
         
     public void FixedUpdate()
@@ -37,7 +46,7 @@ public class EnemyManager : IEntity
         _visual.tag = "Enemy";
             
         _rb = _visual.AddComponent<Rigidbody>();
-        _rb.isKinematic = false;
+        _rb.isKinematic = true;
         _rb.useGravity = false;
         _rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
@@ -70,17 +79,16 @@ public class EnemyManager : IEntity
         _triggerCollider.size = new Vector3(1.5f, 1.5f, 1.5f);
     }
 
-    private void CheckCollision(Collision collision)
+    private void CheckCollision(Transform origin)
     {
-        // if (collision.gameObject.CompareTag("Player") || 
-        //     collision.) 
+        //Vector3 
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("I'm colliding with the player!");
+            Debug.Log("Collided with: " + collision.gameObject.name);
         }
     }
 
