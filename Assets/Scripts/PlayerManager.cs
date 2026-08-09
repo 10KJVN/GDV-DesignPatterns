@@ -6,6 +6,8 @@ using Object = UnityEngine.Object;
 
 public class PlayerManager : IEntity
 {
+    public float Health { get; private set; } = 500f;
+
     private SpellStrategy[] spells;
 
     private GameObject _visual;
@@ -18,7 +20,6 @@ public class PlayerManager : IEntity
     private Mesh _mesh;
 
     private string _name = "The Player";
-    private float _health = 500f;
 
     private void OnEnable()
     {
@@ -48,7 +49,7 @@ public class PlayerManager : IEntity
 
     public void OnUpdate()
     {
-        if (_health <= 0) return;
+        if (Health <= 0) return;
 
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -135,10 +136,10 @@ public class PlayerManager : IEntity
     
     private void TakeDamage(float damage)
     {
-        _health -= damage;
+        Health -= damage;
         // Debug.Log($"HP: {_health} LEFT");
         
-        if (_health <= 0)
+        if (Health <= 0)
         {
             Die();
         }

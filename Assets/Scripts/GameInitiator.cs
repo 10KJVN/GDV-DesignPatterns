@@ -21,10 +21,6 @@ public class GameInitiator : MonoBehaviour
     [SerializeField] private Light _mainDirectionalLight;
     [SerializeField] private EventSystem _mainEventSystem;
     [SerializeField] private GameObject _background;
-
-    [SerializeField] private LevelManager _levelManager;
-    [SerializeField] private LoadingScreen _loadingScreen;
-
     [SerializeField] private bool _gameStarted;
 
     [Header("Player Config")]
@@ -41,11 +37,10 @@ public class GameInitiator : MonoBehaviour
     [SerializeField] private Material enemyMaterial;
     [SerializeField] private Mesh em2Mesh;
     [SerializeField] private Material em2Material;
-
     [SerializeField] private Vector3[] startPositions;
 
     [Header ("UI")]
-    [SerializeField] private HeadsUpDisplay2 _hud;
+    private HeadsUpDisplay2 _hud;
     [SerializeField] private GameObject _canvas;
     [SerializeField] private Sprite _btnSprite;
     private string _btnText = "Fire";
@@ -56,19 +51,11 @@ public class GameInitiator : MonoBehaviour
         {
             BindObjects();
             Debug.Log("Loading...");
-
-            using (var loadingScreenDisposable =
-                   new ShowLoadingScreenDisposable(_loadingScreen))
-            {
-                loadingScreenDisposable.SetLoadingBarPercent(0);
-                await InitializeObjects();
-                loadingScreenDisposable.SetLoadingBarPercent(0.33f);
-                await CreateObjects();
-                loadingScreenDisposable.SetLoadingBarPercent(0.66f);
-                await PrepareGame();
-                loadingScreenDisposable.SetLoadingBarPercent(1f);
-            }
-
+            
+            await InitializeObjects();
+            await CreateObjects();
+            await PrepareGame();
+            
             Debug.Log("Finished loading.");
             await BeginGame();
             
@@ -88,7 +75,6 @@ public class GameInitiator : MonoBehaviour
         _mainEventSystem = Instantiate(_mainEventSystem);
 
         //TODO: Spawner, lvlManager
-        _loadingScreen = Instantiate(_loadingScreen);
         _canvas = Instantiate(_canvas);
     }
 
@@ -158,15 +144,6 @@ public class GameInitiator : MonoBehaviour
         {
             enemy.OnUpdate();
         }
-    }
-    
-
-    // TODO: find a way to actually make it tick?
-    private void OnTick(float dt)
-    {
-        dt = Time.deltaTime;
-        print(dt);
-
     }
 
     private void Update()
