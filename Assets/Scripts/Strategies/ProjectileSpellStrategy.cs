@@ -6,6 +6,7 @@ public class ProjectileSpellStrategy : SpellStrategy
     public GameObject projectilePrefab;
     public float speed = 10f;
     public float duration = 10f;
+    public float damage = 10f;
 
     public override void CastSpell(Transform origin)
     {
@@ -13,6 +14,7 @@ public class ProjectileSpellStrategy : SpellStrategy
             .WithProjectilePrefab(projectilePrefab)
             .WithSpeed(speed)
             .WithDuration(duration)
+            .WithDamage(damage)
             .Build(origin);
     }
 }
