@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd4eab0a4730f3c41bdbeb16b69c7e85, type: 3}
+  m_Name: LegendaryStaff
+  m_EditorClassIdentifier: Assembly-CSharp::ItemDefinition
+  itemName: Legendary Magic Staff
+  description: Made for the masters of magic and is able to cast the most powerful
+    of spels, but make sure you have enough mana.
+  itemType: 0
+  armorType: 0
+  weaponType: 2
+  rarity: 3
+  prefab: {fileID: 8070028330408449662, guid: 8a6f931be47b3b741808c24f476c259a, type: 3}

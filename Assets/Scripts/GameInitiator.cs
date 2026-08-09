@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Disposables;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using Random = UnityEngine.Random;
+using TMPro;
 
 /// <summary>
 /// The single entry point to our game.
@@ -28,7 +27,7 @@ public class GameInitiator : MonoBehaviour
     [SerializeField] private Material playerMaterial;
     [SerializeField] private SpellStrategy[] spells;
     private PlayerManager _playerManager;
-
+    
     private EnemyManager _enemyManager;
     private List<EnemyManager> _managedEnemies;
 
@@ -38,12 +37,31 @@ public class GameInitiator : MonoBehaviour
     [SerializeField] private Mesh em2Mesh;
     [SerializeField] private Material em2Material;
     [SerializeField] private Vector3[] startPositions;
+    
+    [Header("External config")] 
+    [SerializeField] private EnemyDefinition[] startingEnemies;
+    [SerializeField] private Transform[] enemySpawnPoints;
+    [SerializeField] private float respawnDelay = 0.1f;
 
     [Header ("UI")]
     private HeadsUpDisplay2 _hud;
     [SerializeField] private GameObject _canvas;
     [SerializeField] private Sprite _btnSprite;
     private string _btnText = "Fire";
+    
+    [Header("External UI")]
+    [SerializeField] private TMP_Text goldText;
+    [SerializeField] private TMP_Text diamondText;
+    [SerializeField] private GameObject itemInfoPanel;
+    [SerializeField] private TMP_Text itemTitleText;
+    [SerializeField] private TMP_Text itemDescriptionText;
+    
+    private LootSystem _lootSystem;
+    private Dictionary<GameObject, Enemy> _activeEnemies;
+    private Dictionary<GameObject, ItemDefinition> _worldItems;
+    private Dictionary<GameObject, CurrencyDefinition> _worldCurrency;
+    private int _goldAmount;
+    private int _diamondAmount;
 
     private async void Start()
     {
@@ -84,6 +102,13 @@ public class GameInitiator : MonoBehaviour
         _playerManager = new(spells);
         _managedEnemies = new();
         _hud = new();
+        
+        _activeEnemies = new();
+        _worldItems = new();
+        _worldCurrency = new();
+
+        _goldAmount = 0;
+        _diamondAmount = 0;
     }
 
     // Loading in our Entities / Gameplay Objects

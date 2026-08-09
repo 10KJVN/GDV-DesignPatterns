@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd4eab0a4730f3c41bdbeb16b69c7e85, type: 3}
+  m_Name: Epic Sword
+  m_EditorClassIdentifier: Assembly-CSharp::ItemDefinition
+  itemName: Epic Sword
+  description: A sword of good quality and wil help you pass most of your quests
+    with ease.
+  itemType: 0
+  armorType: 0
+  weaponType: 1
+  rarity: 2
+  prefab: {fileID: 2804844261416754142, guid: 261e092c08a77c34386881a62600d44f, type: 3}

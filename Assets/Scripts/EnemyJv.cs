@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamagable
+public class EnemyJv : MonoBehaviour, IDamagable
 {
     public int health = 50;
 
@@ -20,10 +20,10 @@ public class Enemy : MonoBehaviour, IDamagable
     void SpawnEnemy(int index)
     {
         GameObject enemyGO = new GameObject("TestEnemy");
-        Enemy enemy = enemyGO.AddComponent<Enemy>();
+        EnemyJv enemy = enemyGO.AddComponent<EnemyJv>();
         
         
-        enemy = new Enemy().GetComponent<Enemy>();
+        enemy = new EnemyJv().GetComponent<EnemyJv>();
     }
     
     public void TakeDamage(int amount)
