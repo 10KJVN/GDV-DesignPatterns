@@ -12,9 +12,13 @@ public class HeadsUpDisplay2 : IEntity
 {
     private List<Button> buttons = new();
     private GameObject buttonGO;
+    private GameObject btn2;
+    private GameObject btn3;
     private Image img;
+    private Image img2;
 
     private Button fireBtn;
+    private Button iceBtn;
 
     public delegate void ButtonPressedEvent (int index);
     public static event ButtonPressedEvent OnButtonPressed2;
@@ -39,10 +43,14 @@ public class HeadsUpDisplay2 : IEntity
         RectTransform rectTransform = buttonGO.AddComponent<RectTransform>();
 
         rectTransform.SetParent(canvasPos, false);
-        rectTransform.sizeDelta = new Vector2(160, 30);
+        rectTransform.sizeDelta = new Vector2(200, 40);
 
+        btn2 = new GameObject("SecondButton");
+        var rt2 = btn2.AddComponent<RectTransform>();
         
-        //image.sprite = Resources.Load<Sprite>("Resources/unity_builtin_extra/UISprite");
+        rt2.SetParent(canvasPos, false);
+        rt2.sizeDelta = new Vector2(200, 40);
+        rt2.position = new Vector2(400, 40);
     }
 
     public void AssignSprite(Sprite target)
@@ -50,20 +58,28 @@ public class HeadsUpDisplay2 : IEntity
         img = buttonGO.AddComponent<Image>();
         img.sprite = target;
         img.color = Color.red;
+        
+        img2 = btn2.AddComponent<Image>();
+        img2.sprite = target;
+        img2.color = Color.blue;
     }
 
     public void ConfigureButton()
     {
         fireBtn = buttonGO.AddComponent<Button>();
         fireBtn.targetGraphic = img;
+        
+        iceBtn = btn2.AddComponent<Button>();
+        iceBtn.targetGraphic = img2;
     }
 
     private void RegisterButtonsToArray()
     {
         buttons.Add(fireBtn);
+        buttons.Add(iceBtn);
     }
 
-    private void HandleButtonPress(int index) => OnButtonPressed2(index);
+    private void HandleButtonPress(int index) => OnButtonPressed2?.Invoke(index);
 
 
     public void OnUpdate()
