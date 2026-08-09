@@ -34,14 +34,7 @@ public class GameInitiator : MonoBehaviour
     private PlayerManager _playerManager;
 
     private EnemyManager _enemyManager;
-    private EnemyManager _em2;
     private List<EnemyManager> _managedEnemies;
-
-    // A list to hold all the enemies
-    private List<Enemy> _enemies = new();
-
-    private SpellBuilder _spellBuilder = new();
-    private Spell _spell;
 
     [Header("Enemy Config")]
     [SerializeField] private Mesh enemyMesh;
@@ -103,20 +96,10 @@ public class GameInitiator : MonoBehaviour
     // Turning on our services e.g. persistent systems.
     private async Awaitable InitializeObjects()
     {
-        var build = ScriptableObject.CreateInstance<Spell>();
-        _spellBuilder
-            .WithName(build.Name = "yessirski")
-            .WithCost(build.Cost = 10)
-            .WithDamage(build.Damage = 30)
-            //.WithSpeed(build.Speed = 3.5f)
-            .Build();
-
-        _spell = build;
-
         _playerManager = new(spells);
 
-        _enemyManager = new();
-        _em2 = new();
+        // _enemyManager = new();
+        // _em2 = new();
         _managedEnemies = new();
         _hud = new();
     }
@@ -130,30 +113,28 @@ public class GameInitiator : MonoBehaviour
         _playerManager.ConfigureMesh(playerMesh);
         _playerManager.AssignMaterial(playerMaterial);
 
-        _enemyManager.OnStart();
-        _enemyManager.ConfigureMesh(enemyMesh);
-        _enemyManager.AssignMaterial(enemyMaterial);
+        // _enemyManager.OnStart();
+        // _enemyManager.ConfigureMesh(enemyMesh);
+        // _enemyManager.AssignMaterial(enemyMaterial);
+        //
+        // _managedEnemies.Add(_enemyManager);
+        //
+        // _em2.OnStart();
+        // _em2.ConfigureMesh(em2Mesh);
+        // _em2.AssignMaterial(em2Material);
+        // _managedEnemies.Add(_em2);
 
-        _managedEnemies.Add(_enemyManager);
-        
-        _em2.OnStart();
-        _em2.ConfigureMesh(em2Mesh);
-        _em2.AssignMaterial(em2Material);
-        _managedEnemies.Add(_em2);
-
-        // Create some enemies
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 3; i++)
         {
-            _enemies.Add(new Enemy());
+            var enemy = new EnemyManager();
+            
+            enemy.OnStart();
+            enemy.ConfigureMesh(enemyMesh);
+            enemy.AssignMaterial(em2Material);
+            enemy.MoveToPosition(startPositions[i]);
+            
+            _managedEnemies.Add(enemy);
         }
-
-        foreach (Enemy enemy in _enemies)
-        {
-            var enemyGo = new GameObject("TestEnemy");
-            enemyGo.AddComponent<Enemy>();
-        }
-
-        //TODO: Enemies
 
         _hud.CreateButtons(_canvas.transform, _btnText);
         _hud.AssignSprite(_btnSprite);
@@ -169,6 +150,8 @@ public class GameInitiator : MonoBehaviour
         
         _playerManager.MoveToPosition(startPos01);
         // _player.SetStartingElement();
+        
+        // _enemyManager.MoveToPosition(startPos02);
 
         // level and ui logic
         SceneManager.LoadScene("Level", LoadSceneMode.Additive);
@@ -184,15 +167,18 @@ public class GameInitiator : MonoBehaviour
         _gameStarted = true;
         // Show UI animation e.g. stage 1, stage 2 etc.
         // rest of game flow
-
-        _spell.Cast(_mainCamera.transform);
     }
 
     private void OnTick()
     {
         _playerManager?.OnUpdate();
-        _enemyManager?.OnUpdate();
-        _em2?.OnUpdate();
+        // _enemyManager?.OnUpdate();
+        // _em2?.OnUpdate();
+
+        foreach (var enemy in _managedEnemies)
+        {
+            enemy.OnUpdate();
+        }
     }
     
 

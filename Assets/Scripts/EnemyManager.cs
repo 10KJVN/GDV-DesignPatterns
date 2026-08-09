@@ -74,7 +74,12 @@ public class EnemyManager : IEntity
     {
         _triggerCollider = _visual.AddComponent<BoxCollider>();
         _triggerCollider.isTrigger = true;
-        _triggerCollider.size = new Vector3(1.5f, 1.5f, 1.5f);
+        _triggerCollider.size = new Vector3(1.2f, 1.2f, 1.2f);
+    }
+    
+    public void MoveToPosition(Vector3 target)
+    {
+        _visual.transform.position = target;
     }
 
     private void TakeDamage(float damage)
