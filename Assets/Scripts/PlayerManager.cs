@@ -2,6 +2,7 @@
 using Strategies;
 using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class PlayerManager : IEntity
 {
@@ -17,6 +18,7 @@ public class PlayerManager : IEntity
     private Mesh _mesh;
 
     private string _name = "The Player";
+    private float _health = 500f;
 
     private void OnEnable()
     {
@@ -26,11 +28,6 @@ public class PlayerManager : IEntity
     private void OnDisable()
     {
         HeadsUpDisplay2.OnButtonPressed2 -= CastSpell;
-    }
-
-    public PlayerManager()
-    {
-        //OnEnable();
     }
 
     ~PlayerManager()
@@ -51,31 +48,45 @@ public class PlayerManager : IEntity
 
     public void OnUpdate()
     {
+        if (_health <= 0) return;
+
         if (Input.GetKeyDown(KeyCode.W))
         {
             _visual.transform.position += new Vector3(0, 0, 1);
         }
-        
+
         else if (Input.GetKeyDown(KeyCode.S))
         {
             _visual.transform.position += new Vector3(0, 0, -1);
         }
-        
+
         else if (Input.GetKeyDown(KeyCode.A))
         {
             _visual.transform.position += new Vector3(-1, 0, 0);
         }
-        
+
         else if (Input.GetKeyDown(KeyCode.D))
         {
             _visual.transform.position += new Vector3(1, 0, 0);
         }
-        
+
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             _visual.transform.position += new Vector3(0, 1, 0);
         }
         
+        Collider[] hitColliders = Physics.OverlapSphere(_visual.transform.position, 1.0f);
+
+        foreach (var hit in hitColliders)
+        {
+            if (hit.CompareTag("Enemy"))
+            {
+                Debug.Log($"I've been hit by: {hit.name}");
+                TakeDamage(1);
+                break;
+            }
+        }
+
     }
 
     private void CastSpell(int index)
@@ -117,9 +128,26 @@ public class PlayerManager : IEntity
         _triggerCollider.size = new Vector3(1.5f, 1.5f, 1.5f);
     }
 
-    // TODO: Spawn in the HUD through code
-    // And somehow assign the spell strat spells to it
-    // e.g. Assets/Scripts/ScriptableObjects/Spells/OrbitalSpellStrategy.asset
+    public void MoveToPosition(Vector3 target)
+    {
+        _visual.transform.position = target;
+    }
+    
+    private void TakeDamage(float damage)
+    {
+        _health -= damage;
+        // Debug.Log($"HP: {_health} LEFT");
+        
+        if (_health <= 0)
+        {
+            Die();
+        }
+    }
 
-    // TODO: Also find a way to make the transform be an actual transform.
+    private void Die()
+    {
+        Debug.Log("GAME OVER");
+        Object.Destroy(_visual);
+    }
+
 }

@@ -4,6 +4,7 @@ using Disposables;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// The single entry point to our game.
@@ -48,7 +49,7 @@ public class GameInitiator : MonoBehaviour
     [SerializeField] private Mesh em2Mesh;
     [SerializeField] private Material em2Material;
 
-    [SerializeField] private Transform[] randomStartPositions;
+    [SerializeField] private Vector3[] startPositions;
 
     [Header ("UI")]
     [SerializeField] private HeadsUpDisplay2 _hud;
@@ -162,7 +163,11 @@ public class GameInitiator : MonoBehaviour
     // Setting up our objects
     private async Awaitable PrepareGame()
     {
-        // _player.MoveToPosition();
+        var startPos01 = startPositions[0];
+        // var startPos02 = startPositions[1];
+        // var startPos03 = startPositions[2];
+        
+        _playerManager.MoveToPosition(startPos01);
         // _player.SetStartingElement();
 
         // level and ui logic
