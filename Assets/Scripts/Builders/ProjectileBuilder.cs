@@ -37,7 +37,7 @@ public class ProjectileBuilder : ScriptableObject
     {
         Vector3 instantiatePosition = origin.position + origin.forward * 2f;
         
-        GameObject fireball = Instantiate(_projectilePrefab, instantiatePosition.With(y: 0.5f), Quaternion.identity);
+        GameObject fireball = Instantiate(_projectilePrefab, instantiatePosition.With(y: 0.25f), Quaternion.identity);
         Rigidbody rb = fireball.GetComponent<Rigidbody>();
         rb.linearVelocity = fireball.transform.forward * _speed;
         Destroy(fireball, _duration);

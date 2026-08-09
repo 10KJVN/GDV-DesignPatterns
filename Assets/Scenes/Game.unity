@@ -173,15 +173,15 @@ MonoBehaviour:
   playerMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
   playerMaterial: {fileID: 2100000, guid: 93131413c403f8e458f97ab408854f33, type: 2}
   spells:
-  - {fileID: 11400000, guid: 2917f9793d7701c449d71aba70715210, type: 2}
+  - {fileID: 11400000, guid: b27e1b2edb5ca7941bae649b1361fc51, type: 2}
   enemyMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
   enemyMaterial: {fileID: 2100000, guid: 872d56d15ff47d349aec6dce8abf2db7, type: 2}
   em2Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
   em2Material: {fileID: 2100000, guid: 665cb804d70f4f943a107d610b500e42, type: 2}
   startPositions:
-  - {x: 0, y: -1.5, z: -2.5}
-  - {x: -5, y: -1, z: 5}
-  - {x: 6, y: -1, z: 7}
+  - {x: 0, y: -0.6, z: -1}
+  - {x: -5, y: -0.6, z: 5}
+  - {x: 6, y: -0.6, z: 7}
   _canvas: {fileID: 7477895969596209936, guid: 7d2545506e19e0b4192f43645425639f, type: 3}
   _btnSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1660057539 &9223372036854775807

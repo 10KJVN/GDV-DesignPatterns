@@ -73,7 +73,6 @@ public class GameInitiator : MonoBehaviour
             await BeginGame();
             
             Debug.Log("Ticking has begun!");
-            // OnTick(Time.deltaTime);
         }
 
         catch (Exception e) { Debug.Log($"Failed loading: {e}"); }
@@ -97,9 +96,6 @@ public class GameInitiator : MonoBehaviour
     private async Awaitable InitializeObjects()
     {
         _playerManager = new(spells);
-
-        // _enemyManager = new();
-        // _em2 = new();
         _managedEnemies = new();
         _hud = new();
     }
@@ -112,17 +108,6 @@ public class GameInitiator : MonoBehaviour
         _playerManager.OnStart();
         _playerManager.ConfigureMesh(playerMesh);
         _playerManager.AssignMaterial(playerMaterial);
-
-        // _enemyManager.OnStart();
-        // _enemyManager.ConfigureMesh(enemyMesh);
-        // _enemyManager.AssignMaterial(enemyMaterial);
-        //
-        // _managedEnemies.Add(_enemyManager);
-        //
-        // _em2.OnStart();
-        // _em2.ConfigureMesh(em2Mesh);
-        // _em2.AssignMaterial(em2Material);
-        // _managedEnemies.Add(_em2);
 
         for (int i = 0; i < 3; i++)
         {
@@ -144,14 +129,10 @@ public class GameInitiator : MonoBehaviour
     // Setting up our objects
     private async Awaitable PrepareGame()
     {
-        var startPos01 = startPositions[0];
-        // var startPos02 = startPositions[1];
-        // var startPos03 = startPositions[2];
+        var playerStart = new Vector3(0f, -1f, -10f);
         
-        _playerManager.MoveToPosition(startPos01);
+        _playerManager.MoveToPosition(playerStart);
         // _player.SetStartingElement();
-        
-        // _enemyManager.MoveToPosition(startPos02);
 
         // level and ui logic
         SceneManager.LoadScene("Level", LoadSceneMode.Additive);
@@ -172,9 +153,7 @@ public class GameInitiator : MonoBehaviour
     private void OnTick()
     {
         _playerManager?.OnUpdate();
-        // _enemyManager?.OnUpdate();
-        // _em2?.OnUpdate();
-
+        
         foreach (var enemy in _managedEnemies)
         {
             enemy.OnUpdate();
