@@ -126,7 +126,6 @@ public class GameInitiator : MonoBehaviour
         _playerManager.AssignMaterial(playerMaterial);
 
         _enemyManager.OnStart();
-
         _enemyManager.ConfigureMesh(enemyMesh);
         _enemyManager.AssignMaterial(enemyMaterial);
 
@@ -177,9 +176,8 @@ public class GameInitiator : MonoBehaviour
 
     private void OnTick()
     {
-        _playerManager.OnUpdate();
-        _enemyManager.OnUpdate();
-        _enemyManager.FixedUpdate();
+        _playerManager?.OnUpdate();
+        _enemyManager?.OnUpdate();
     }
     
 

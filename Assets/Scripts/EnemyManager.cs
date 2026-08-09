@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 public class EnemyManager : IEntity
 {
     private string _name = "DefaultEnemy";
-    private int _health = 20;
+    private float _health = 20;
 
     private GameObject _visual = default;
     private Rigidbody _rb;
@@ -13,9 +13,7 @@ public class EnemyManager : IEntity
     private BoxCollider _triggerCollider;
     private MeshRenderer _meshRenderer;
     private MeshFilter _meshFilter;
-
-    [SerializeField] private Mesh targetMesh;
-
+    
     public void OnStart()
     {
         Debug.Log("IVE STARTED");
@@ -24,6 +22,7 @@ public class EnemyManager : IEntity
 
     public void OnUpdate()
     {
+        if (_health <= 0) return;
         //Debug.Log("Yay the enemy is being updated");
         Collider[] hitColliders = Physics.OverlapSphere(_visual.transform.position, 1.0f);
 
@@ -32,15 +31,11 @@ public class EnemyManager : IEntity
             if (hit.CompareTag("Spell"))
             {
                 Debug.Log($"I've been hit by: {hit.name}");
+                TakeDamage(10); // Better comms later maybe
                 Object.Destroy(hit.gameObject);
                 break;
             }
         }
-    }
-        
-    public void FixedUpdate()
-    {
-        
     }
 
     private void ConfigureUnityComponents()
@@ -82,24 +77,20 @@ public class EnemyManager : IEntity
         _triggerCollider.size = new Vector3(1.5f, 1.5f, 1.5f);
     }
 
-    private void CheckCollision(Transform origin)
+    private void TakeDamage(float damage)
     {
-        //Vector3 
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
+        _health -= damage;
+        Debug.Log($"HP: {_health} LEFT");
+        
+        if (_health <= 0)
         {
-            Debug.Log("Collided with: " + collision.gameObject.name);
+            Die();
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Die()
     {
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log($"I've hit the {other} player!"); 
-        }
+        Debug.Log("Oh no, i've died.");
+        Object.Destroy(_visual);
     }
 }   
