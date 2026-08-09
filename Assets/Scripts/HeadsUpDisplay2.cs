@@ -10,15 +10,18 @@ using UnityEngine.UI;
 
 public class HeadsUpDisplay2 : IEntity
 {
-    private List<Button> buttons = new();
-    private GameObject buttonGO;
+    private GameObject btn1;
     private GameObject btn2;
     private GameObject btn3;
+    
     private Image img;
     private Image img2;
+    private Image img3;
 
     private Button fireBtn;
     private Button iceBtn;
+    private Button orbitBtn;
+    private List<Button> buttons = new();
 
     public delegate void ButtonPressedEvent (int index);
     public static event ButtonPressedEvent OnButtonPressed2;
@@ -39,44 +42,59 @@ public class HeadsUpDisplay2 : IEntity
 
     public void CreateButtons(Transform canvasPos, string btnText)
     {
-        buttonGO = new("CodeGeneratedButton");
-        RectTransform rectTransform = buttonGO.AddComponent<RectTransform>();
+        btn1 = new("CodeGeneratedButton");
+        RectTransform rectTransform = btn1.AddComponent<RectTransform>();
 
         rectTransform.SetParent(canvasPos, false);
-        rectTransform.sizeDelta = new Vector2(200, 40);
+        rectTransform.sizeDelta = new Vector2(200, 80);
+        rectTransform.position = new Vector2(200, 50);
 
         btn2 = new GameObject("SecondButton");
         var rt2 = btn2.AddComponent<RectTransform>();
         
         rt2.SetParent(canvasPos, false);
-        rt2.sizeDelta = new Vector2(200, 40);
-        rt2.position = new Vector2(400, 40);
+        rt2.sizeDelta = new Vector2(200, 80);
+        rt2.position = new Vector2(400, 50);
+        
+        btn3 = new GameObject("ThirdButton");
+        var rt3 = btn3.AddComponent<RectTransform>();
+        rt3.SetParent(canvasPos, false);
+        rt3.sizeDelta = new Vector2(200, 80);
+        rt3.position = new Vector2(600, 50);
     }
 
     public void AssignSprite(Sprite target)
     {
-        img = buttonGO.AddComponent<Image>();
+        img = btn1.AddComponent<Image>();
         img.sprite = target;
         img.color = Color.red;
         
         img2 = btn2.AddComponent<Image>();
         img2.sprite = target;
         img2.color = Color.blue;
+        
+        img3 = btn3.AddComponent<Image>();
+        img3.sprite = target;
+        img3.color = Color.green;
     }
 
     public void ConfigureButton()
     {
-        fireBtn = buttonGO.AddComponent<Button>();
+        fireBtn = btn1.AddComponent<Button>();
         fireBtn.targetGraphic = img;
         
         iceBtn = btn2.AddComponent<Button>();
         iceBtn.targetGraphic = img2;
+        
+        orbitBtn = btn3.AddComponent<Button>();
+        orbitBtn.targetGraphic = img3;
     }
 
     private void RegisterButtonsToArray()
     {
         buttons.Add(fireBtn);
         buttons.Add(iceBtn);
+        buttons.Add(orbitBtn);
     }
 
     private void HandleButtonPress(int index) => OnButtonPressed2?.Invoke(index);
