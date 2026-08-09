@@ -33,6 +33,7 @@ public class GameInitiator : MonoBehaviour
     private PlayerManager _playerManager;
 
     private EnemyManager _enemyManager;
+    private EnemyManager _em2;
     private List<EnemyManager> _managedEnemies;
 
     // A list to hold all the enemies
@@ -44,6 +45,8 @@ public class GameInitiator : MonoBehaviour
     [Header("Enemy Config")]
     [SerializeField] private Mesh enemyMesh;
     [SerializeField] private Material enemyMaterial;
+    [SerializeField] private Mesh em2Mesh;
+    [SerializeField] private Material em2Material;
 
     [SerializeField] private Transform[] randomStartPositions;
 
@@ -112,6 +115,7 @@ public class GameInitiator : MonoBehaviour
         _playerManager = new(spells);
 
         _enemyManager = new();
+        _em2 = new();
         _managedEnemies = new();
         _hud = new();
     }
@@ -130,6 +134,11 @@ public class GameInitiator : MonoBehaviour
         _enemyManager.AssignMaterial(enemyMaterial);
 
         _managedEnemies.Add(_enemyManager);
+        
+        _em2.OnStart();
+        _em2.ConfigureMesh(em2Mesh);
+        _em2.AssignMaterial(em2Material);
+        _managedEnemies.Add(_em2);
 
         // Create some enemies
         for (int i = 0; i < 1; i++)
@@ -178,6 +187,7 @@ public class GameInitiator : MonoBehaviour
     {
         _playerManager?.OnUpdate();
         _enemyManager?.OnUpdate();
+        _em2?.OnUpdate();
     }
     
 
